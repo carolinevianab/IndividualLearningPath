@@ -1,0 +1,597 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		10188C8C24A24FE700BB2A8E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10188C8B24A24FE700BB2A8E /* AppDelegate.swift */; };
+		10188C8E24A24FE700BB2A8E /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 10188C8D24A24FE700BB2A8E /* GameScene.sks */; };
+		10188C9024A24FE700BB2A8E /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 10188C8F24A24FE700BB2A8E /* Actions.sks */; };
+		10188C9224A24FE700BB2A8E /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10188C9124A24FE700BB2A8E /* GameScene.swift */; };
+		10188C9424A24FE700BB2A8E /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10188C9324A24FE700BB2A8E /* GameViewController.swift */; };
+		10188C9724A24FE700BB2A8E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 10188C9524A24FE700BB2A8E /* Main.storyboard */; };
+		10188C9924A24FE900BB2A8E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 10188C9824A24FE900BB2A8E /* Assets.xcassets */; };
+		10188C9C24A24FE900BB2A8E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 10188C9A24A24FE900BB2A8E /* LaunchScreen.storyboard */; };
+		10188CA724A24FE900BB2A8E /* SkyGameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10188CA624A24FE900BB2A8E /* SkyGameTests.swift */; };
+		10188CB224A24FE900BB2A8E /* SkyGameUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10188CB124A24FE900BB2A8E /* SkyGameUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		10188CA324A24FE900BB2A8E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 10188C8024A24FE700BB2A8E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 10188C8724A24FE700BB2A8E;
+			remoteInfo = SkyGame;
+		};
+		10188CAE24A24FE900BB2A8E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 10188C8024A24FE700BB2A8E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 10188C8724A24FE700BB2A8E;
+			remoteInfo = SkyGame;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		10188C8824A24FE700BB2A8E /* SkyGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SkyGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		10188C8B24A24FE700BB2A8E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		10188C8D24A24FE700BB2A8E /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
+		10188C8F24A24FE700BB2A8E /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
+		10188C9124A24FE700BB2A8E /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		10188C9324A24FE700BB2A8E /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		10188C9624A24FE700BB2A8E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		10188C9824A24FE900BB2A8E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		10188C9B24A24FE900BB2A8E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		10188C9D24A24FE900BB2A8E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		10188CA224A24FE900BB2A8E /* SkyGameTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SkyGameTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		10188CA624A24FE900BB2A8E /* SkyGameTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkyGameTests.swift; sourceTree = "<group>"; };
+		10188CA824A24FE900BB2A8E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		10188CAD24A24FE900BB2A8E /* SkyGameUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SkyGameUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		10188CB124A24FE900BB2A8E /* SkyGameUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkyGameUITests.swift; sourceTree = "<group>"; };
+		10188CB324A24FE900BB2A8E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		10188C8524A24FE700BB2A8E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		10188C9F24A24FE900BB2A8E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		10188CAA24A24FE900BB2A8E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		10188C7F24A24FE700BB2A8E = {
+			isa = PBXGroup;
+			children = (
+				10188C8A24A24FE700BB2A8E /* SkyGame */,
+				10188CA524A24FE900BB2A8E /* SkyGameTests */,
+				10188CB024A24FE900BB2A8E /* SkyGameUITests */,
+				10188C8924A24FE700BB2A8E /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		10188C8924A24FE700BB2A8E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				10188C8824A24FE700BB2A8E /* SkyGame.app */,
+				10188CA224A24FE900BB2A8E /* SkyGameTests.xctest */,
+				10188CAD24A24FE900BB2A8E /* SkyGameUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		10188C8A24A24FE700BB2A8E /* SkyGame */ = {
+			isa = PBXGroup;
+			children = (
+				10188C8B24A24FE700BB2A8E /* AppDelegate.swift */,
+				10188C8D24A24FE700BB2A8E /* GameScene.sks */,
+				10188C8F24A24FE700BB2A8E /* Actions.sks */,
+				10188C9124A24FE700BB2A8E /* GameScene.swift */,
+				10188C9324A24FE700BB2A8E /* GameViewController.swift */,
+				10188C9524A24FE700BB2A8E /* Main.storyboard */,
+				10188C9824A24FE900BB2A8E /* Assets.xcassets */,
+				10188C9A24A24FE900BB2A8E /* LaunchScreen.storyboard */,
+				10188C9D24A24FE900BB2A8E /* Info.plist */,
+			);
+			path = SkyGame;
+			sourceTree = "<group>";
+		};
+		10188CA524A24FE900BB2A8E /* SkyGameTests */ = {
+			isa = PBXGroup;
+			children = (
+				10188CA624A24FE900BB2A8E /* SkyGameTests.swift */,
+				10188CA824A24FE900BB2A8E /* Info.plist */,
+			);
+			path = SkyGameTests;
+			sourceTree = "<group>";
+		};
+		10188CB024A24FE900BB2A8E /* SkyGameUITests */ = {
+			isa = PBXGroup;
+			children = (
+				10188CB124A24FE900BB2A8E /* SkyGameUITests.swift */,
+				10188CB324A24FE900BB2A8E /* Info.plist */,
+			);
+			path = SkyGameUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		10188C8724A24FE700BB2A8E /* SkyGame */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 10188CB624A24FE900BB2A8E /* Build configuration list for PBXNativeTarget "SkyGame" */;
+			buildPhases = (
+				10188C8424A24FE700BB2A8E /* Sources */,
+				10188C8524A24FE700BB2A8E /* Frameworks */,
+				10188C8624A24FE700BB2A8E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SkyGame;
+			productName = SkyGame;
+			productReference = 10188C8824A24FE700BB2A8E /* SkyGame.app */;
+			productType = "com.apple.product-type.application";
+		};
+		10188CA124A24FE900BB2A8E /* SkyGameTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 10188CB924A24FE900BB2A8E /* Build configuration list for PBXNativeTarget "SkyGameTests" */;
+			buildPhases = (
+				10188C9E24A24FE900BB2A8E /* Sources */,
+				10188C9F24A24FE900BB2A8E /* Frameworks */,
+				10188CA024A24FE900BB2A8E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				10188CA424A24FE900BB2A8E /* PBXTargetDependency */,
+			);
+			name = SkyGameTests;
+			productName = SkyGameTests;
+			productReference = 10188CA224A24FE900BB2A8E /* SkyGameTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		10188CAC24A24FE900BB2A8E /* SkyGameUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 10188CBC24A24FE900BB2A8E /* Build configuration list for PBXNativeTarget "SkyGameUITests" */;
+			buildPhases = (
+				10188CA924A24FE900BB2A8E /* Sources */,
+				10188CAA24A24FE900BB2A8E /* Frameworks */,
+				10188CAB24A24FE900BB2A8E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				10188CAF24A24FE900BB2A8E /* PBXTargetDependency */,
+			);
+			name = SkyGameUITests;
+			productName = SkyGameUITests;
+			productReference = 10188CAD24A24FE900BB2A8E /* SkyGameUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		10188C8024A24FE700BB2A8E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1140;
+				LastUpgradeCheck = 1140;
+				ORGANIZATIONNAME = "Caroline Viana";
+				TargetAttributes = {
+					10188C8724A24FE700BB2A8E = {
+						CreatedOnToolsVersion = 11.4;
+					};
+					10188CA124A24FE900BB2A8E = {
+						CreatedOnToolsVersion = 11.4;
+						TestTargetID = 10188C8724A24FE700BB2A8E;
+					};
+					10188CAC24A24FE900BB2A8E = {
+						CreatedOnToolsVersion = 11.4;
+						TestTargetID = 10188C8724A24FE700BB2A8E;
+					};
+				};
+			};
+			buildConfigurationList = 10188C8324A24FE700BB2A8E /* Build configuration list for PBXProject "SkyGame" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 10188C7F24A24FE700BB2A8E;
+			productRefGroup = 10188C8924A24FE700BB2A8E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				10188C8724A24FE700BB2A8E /* SkyGame */,
+				10188CA124A24FE900BB2A8E /* SkyGameTests */,
+				10188CAC24A24FE900BB2A8E /* SkyGameUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		10188C8624A24FE700BB2A8E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				10188C9724A24FE700BB2A8E /* Main.storyboard in Resources */,
+				10188C8E24A24FE700BB2A8E /* GameScene.sks in Resources */,
+				10188C9924A24FE900BB2A8E /* Assets.xcassets in Resources */,
+				10188C9C24A24FE900BB2A8E /* LaunchScreen.storyboard in Resources */,
+				10188C9024A24FE700BB2A8E /* Actions.sks in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		10188CA024A24FE900BB2A8E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		10188CAB24A24FE900BB2A8E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		10188C8424A24FE700BB2A8E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				10188C9224A24FE700BB2A8E /* GameScene.swift in Sources */,
+				10188C9424A24FE700BB2A8E /* GameViewController.swift in Sources */,
+				10188C8C24A24FE700BB2A8E /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		10188C9E24A24FE900BB2A8E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				10188CA724A24FE900BB2A8E /* SkyGameTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		10188CA924A24FE900BB2A8E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				10188CB224A24FE900BB2A8E /* SkyGameUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		10188CA424A24FE900BB2A8E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 10188C8724A24FE700BB2A8E /* SkyGame */;
+			targetProxy = 10188CA324A24FE900BB2A8E /* PBXContainerItemProxy */;
+		};
+		10188CAF24A24FE900BB2A8E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 10188C8724A24FE700BB2A8E /* SkyGame */;
+			targetProxy = 10188CAE24A24FE900BB2A8E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		10188C9524A24FE700BB2A8E /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				10188C9624A24FE700BB2A8E /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		10188C9A24A24FE900BB2A8E /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				10188C9B24A24FE900BB2A8E /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		10188CB424A24FE900BB2A8E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		10188CB524A24FE900BB2A8E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		10188CB724A24FE900BB2A8E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = SkyGame/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = NadaAinda.SkyGame;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		10188CB824A24FE900BB2A8E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = SkyGame/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = NadaAinda.SkyGame;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		10188CBA24A24FE900BB2A8E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = SkyGameTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = NadaAinda.SkyGameTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SkyGame.app/SkyGame";
+			};
+			name = Debug;
+		};
+		10188CBB24A24FE900BB2A8E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = SkyGameTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = NadaAinda.SkyGameTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SkyGame.app/SkyGame";
+			};
+			name = Release;
+		};
+		10188CBD24A24FE900BB2A8E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = SkyGameUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = NadaAinda.SkyGameUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = SkyGame;
+			};
+			name = Debug;
+		};
+		10188CBE24A24FE900BB2A8E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = SkyGameUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = NadaAinda.SkyGameUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = SkyGame;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		10188C8324A24FE700BB2A8E /* Build configuration list for PBXProject "SkyGame" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				10188CB424A24FE900BB2A8E /* Debug */,
+				10188CB524A24FE900BB2A8E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		10188CB624A24FE900BB2A8E /* Build configuration list for PBXNativeTarget "SkyGame" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				10188CB724A24FE900BB2A8E /* Debug */,
+				10188CB824A24FE900BB2A8E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		10188CB924A24FE900BB2A8E /* Build configuration list for PBXNativeTarget "SkyGameTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				10188CBA24A24FE900BB2A8E /* Debug */,
+				10188CBB24A24FE900BB2A8E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		10188CBC24A24FE900BB2A8E /* Build configuration list for PBXNativeTarget "SkyGameUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				10188CBD24A24FE900BB2A8E /* Debug */,
+				10188CBE24A24FE900BB2A8E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 10188C8024A24FE700BB2A8E /* Project object */;
+}
