@@ -22,81 +22,73 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let leftControl = SKSpriteNode(imageNamed: "leftArrow")
     let jumpControl = SKSpriteNode(imageNamed: "jump")
     let ground = SKSpriteNode(imageNamed: "ground2")
-    let enemy = SKSpriteNode(imageNamed: "enemy")
+    let gameOver = SKSpriteNode(imageNamed: "gameOver")
+    let gameWin = SKSpriteNode(imageNamed: "youWin")
     
     var touchLocal: CGPoint = CGPoint(x: 0, y: 0)
     var jumpYes = false
     var didJump = false
     var isPlayerAlive = true
     var lastFire: Double = 0
+    var enemyNumber = 0
+    var screenCount = 0
+    
     
     
     override func didMove(to view: SKView) {
         physicsWorld.contactDelegate = self
-        // Adicionando background
-        //Posição do background
+        
         background.position = CGPoint(x: frame.midX, y: frame.midY)
-        //Tamanho
         background.size = frame.size
-        //tipo AddSubview
         addChild(background)
         
-        
-        player.size = CGSize(width: player.size.width * 2, height: player.size.height * 2)
-        player.position = CGPoint(x: 10, y: 10)
-        //Pensar nisso como layers do photoshop
-        player.zPosition = background.zPosition + 1
-        //Criando fisica
-        player.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 100, height: player.frame.height))
-        addChild(player)
-        
-        
-        player.physicsBody?.allowsRotation = false
-        // O que o objeto é no mundo fisico
-        player.physicsBody?.categoryBitMask = CollisionType.player.rawValue
-        // Com o que colide
-        player.physicsBody?.collisionBitMask = CollisionType.ground.rawValue | CollisionType.enemy.rawValue
-        // O que, quando colide, nós queremos saber
-        player.physicsBody?.contactTestBitMask = CollisionType.enemy.rawValue
-        player.name = "player"
-        
-        
-        let lcontrolSize = leftControl.size
-        leftControl.position = CGPoint(x: frame.minX + lcontrolSize.width / 2, y: frame.minY + lcontrolSize.height / 2)
-        leftControl.zPosition = 100
-        leftControl.name = "leftControl"
-        addChild(leftControl)
-        
-       
-        let rcontrolSize = rightControl.size
-        rightControl.position = CGPoint(x: frame.minX + rcontrolSize.width / 2 + lcontrolSize.width, y: frame.minY + rcontrolSize.height / 2)
-        rightControl.zPosition = 100
-        rightControl.name = "rightControl"
-        addChild(rightControl)
-        
-        
-        let jumpSize = jumpControl.size
-        jumpControl.position = CGPoint(x: frame.maxX - jumpSize.width / 2, y: frame.minY + jumpSize.height / 2)
-        jumpControl.zPosition = 100
-        jumpControl.name = "jumpControl"
-        addChild(jumpControl)
-        
-        
-        enemy.position = CGPoint(x: 300, y: 100)
-        enemy.zPosition = background.zPosition + 1
-        enemy.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: enemy.size.width, height: enemy.size.height))
-        enemy.physicsBody?.categoryBitMask = CollisionType.enemy.rawValue
-        // Com o que colide
-        enemy.physicsBody?.collisionBitMask = CollisionType.player.rawValue
-        enemy.physicsBody?.allowsRotation = false
-        enemy.name = "enemy"
-        addChild(enemy)
-        
+        createScene()
         
         //Definição do chão (onde ele fica)
         physicsBody = SKPhysicsBody(edgeLoopFrom: frame.inset(by: UIEdgeInsets(top: 10, left: 0, bottom: 30, right: 0)))
         
+        reloadScreen()
+    }
+    
+    func createScene(){
+        player.size = CGSize(width: player.size.width * 2, height: player.size.height * 2)
+         player.position = CGPoint(x: 10, y: 10)
+         //Pensar nisso como layers do photoshop
+         player.zPosition = background.zPosition + 1
+         //Criando fisica
+         player.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 100, height: player.frame.height))
+         addChild(player)
+         
+         
+         player.physicsBody?.allowsRotation = false
+         // O que o objeto é no mundo fisico
+         player.physicsBody?.categoryBitMask = CollisionType.player.rawValue
+         // Com o que colide
+         player.physicsBody?.collisionBitMask = CollisionType.ground.rawValue | CollisionType.enemy.rawValue
+         // O que, quando colide, nós queremos saber
+         player.physicsBody?.contactTestBitMask = CollisionType.enemy.rawValue
+         player.name = "player"
+         
+         
+         let lcontrolSize = leftControl.size
+         leftControl.position = CGPoint(x: frame.minX + lcontrolSize.width / 2, y: frame.minY + lcontrolSize.height / 2)
+         leftControl.zPosition = 100
+         leftControl.name = "leftControl"
+         addChild(leftControl)
+         
         
+         let rcontrolSize = rightControl.size
+         rightControl.position = CGPoint(x: frame.minX + rcontrolSize.width / 2 + lcontrolSize.width, y: frame.minY + rcontrolSize.height / 2)
+         rightControl.zPosition = 100
+         rightControl.name = "rightControl"
+         addChild(rightControl)
+         
+         
+         let jumpSize = jumpControl.size
+         jumpControl.position = CGPoint(x: frame.maxX - jumpSize.width / 2, y: frame.minY + jumpSize.height / 2)
+         jumpControl.zPosition = 100
+         jumpControl.name = "jumpControl"
+         addChild(jumpControl)
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -120,14 +112,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             player.run(SKAction.move(to: CGPoint(x: player.position.x - 30, y: player.position.y), duration: 0.1))
         }
         if(jumpControl.contains(touchLocal)){
-            if(!didJump){
-                didJump = true
-                jumpYes = true
-            }
+//            if(!didJump){
+//                didJump = true
+//                jumpYes = true
+//            }
+            if(lastFire + 0.3 < currentTime){
+                           lastFire = currentTime
+                           shoot()
+                       }
             
         }
 
-        if (jumpYes == true){
+//        if (jumpYes == true){
 //            var i = 0
 //            while i < 20 {
 //                if(rightControl.contains(touchLocal)){
@@ -139,17 +135,56 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 //                i = i + 1
 //            }
             //jumpYes = false
-            if(lastFire + 0.3 < currentTime){
-                lastFire = currentTime
-                shoot()
-            }
-            
-        }
-        
+//            if(lastFire + 0.3 < currentTime){
+//                lastFire = currentTime
+//                shoot()
+//            }
+//
+//        }
+         
         if(player.position.x >= 350){
             touchLocal = CGPoint(x: 0, y: 0)
+            player.removeAllActions()
             player.position.x = -350
+            
         }
+        if player.position.x == -350{
+            player.position.x = -349
+            reloadScreen()
+        }
+        
+        if(isPlayerAlive && screenCount == 10){
+            youWin()
+        }
+        
+        
+        
+    }
+    
+    func reloadScreen(){
+        if(enemyNumber == 0){
+            screenCount += 1
+            makeEnemy()
+        }
+        
+    }
+    
+    func makeEnemy(){
+        while(enemyNumber < 1){
+            let enemy = SKSpriteNode(imageNamed: "enemy1")
+            enemy.position = CGPoint(x: 300, y: 100)
+            enemy.zPosition = background.zPosition + 1
+            enemy.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: enemy.size.width, height: enemy.size.height))
+            enemy.physicsBody?.categoryBitMask = CollisionType.enemy.rawValue
+            // Com o que colide
+            enemy.physicsBody?.collisionBitMask = CollisionType.player.rawValue
+            enemy.physicsBody?.allowsRotation = false
+            enemy.name = "enemy"
+            addChild(enemy)
+            
+            enemyNumber += 1
+        }
+        
     }
     
     func shoot(){
@@ -197,7 +232,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             
             if(firstNode.name == "enemy"){
-                gameOver()
+                gameOverDead()
                 secondNode.removeFromParent()
             }
             
@@ -208,12 +243,35 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if firstNode.name == "enemy"{
                 firstNode.removeFromParent()
                 secondNode.removeFromParent()
+                enemyNumber -= 1
             }
         }
     }
     
-    func gameOver(){
+    func gameOverDead(){
         isPlayerAlive = false
         print("lol dead")
+        gameOver.position = CGPoint(x: frame.midX, y: frame.midY)
+        gameOver.size = CGSize(width: gameOver.size.width * 3, height: gameOver.size.height * 3)
+        gameOver.zPosition = 150
+        addChild(gameOver)
+        
+        self.removeChildren(in: [jumpControl, rightControl, leftControl])
+
+    }
+    var i = 0
+    func youWin(){
+        
+        if(i == 0){
+            print("win yay")
+            gameWin.position = CGPoint(x: frame.midX, y: frame.midY)
+            gameWin.size = CGSize(width: gameWin.size.width * 3, height: gameWin.size.height * 3)
+            gameWin.zPosition = 150
+            addChild(gameWin)
+            self.removeChildren(in: [jumpControl, rightControl, leftControl])
+
+            i+=1
+        }
+        
     }
 }
