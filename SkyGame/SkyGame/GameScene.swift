@@ -24,6 +24,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let ground = SKSpriteNode(imageNamed: "ground2")
     let gameOver = SKSpriteNode(imageNamed: "gameOver")
     let gameWin = SKSpriteNode(imageNamed: "youWin")
+    let enemies = ["iEye", "Glixino", "Havyion", "Pinclet"]
+    
     
     var touchLocal: CGPoint = CGPoint(x: 0, y: 0)
     var jumpYes = false
@@ -31,7 +33,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var isPlayerAlive = true
     var lastFire: Double = 0
     var enemyNumber = 0
-    var screenCount = 0
+    var screenCount = -1
+    var enemyPerLevel = 0
     
     
     
@@ -51,8 +54,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func createScene(){
-        player.size = CGSize(width: player.size.width * 2, height: player.size.height * 2)
-         player.position = CGPoint(x: 10, y: 10)
+        player.size = CGSize(width: player.size.width / 1.5, height: player.size.height / 1.5)
+         player.position = CGPoint(x: -349, y: 10)
          //Pensar nisso como layers do photoshop
          player.zPosition = background.zPosition + 1
          //Criando fisica
@@ -146,7 +149,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             touchLocal = CGPoint(x: 0, y: 0)
             player.removeAllActions()
             player.position.x = -350
-            
         }
         if player.position.x == -350{
             player.position.x = -349
@@ -157,26 +159,42 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             youWin()
         }
         
+        guard let bla = self.childNode(withName: "enemy") else {return}
+        
+        if player.position.x  >= bla.position.x - 200 {
+            guard isPlayerAlive else {return}
+            isPlayerAlive = false
+            gameOverDead()
+            player.removeFromParent()
+        }
+        
         
         
     }
-    
+
     func reloadScreen(){
         if(enemyNumber == 0){
             screenCount += 1
+            if(screenCount == 1 || screenCount == 4 || screenCount == 7){
+                enemyPerLevel += 1
+            }
             makeEnemy()
         }
         
     }
     
     func makeEnemy(){
-        while(enemyNumber < 1){
-            let enemy = SKSpriteNode(imageNamed: "enemy1")
-            enemy.position = CGPoint(x: 300, y: 100)
+        while(enemyNumber < enemyPerLevel){
+            let choice = enemies.randomElement() ?? "iEye"
+            let enemy = SKSpriteNode(imageNamed: choice)
+            
+            let m = Int.random(in: -100 ... 300)
+            
+            
+            enemy.position = CGPoint(x: m, y: 0)
             enemy.zPosition = background.zPosition + 1
             enemy.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: enemy.size.width, height: enemy.size.height))
             enemy.physicsBody?.categoryBitMask = CollisionType.enemy.rawValue
-            // Com o que colide
             enemy.physicsBody?.collisionBitMask = CollisionType.player.rawValue
             enemy.physicsBody?.allowsRotation = false
             enemy.name = "enemy"
@@ -205,6 +223,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         addChild(weapon)
         weapon.physicsBody?.applyImpulse(CGVector(dx: 150, dy: 0))
+        
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
@@ -263,7 +282,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func youWin(){
         
         if(i == 0){
-            print("win yay")
+            self.removeAllChildren()
             gameWin.position = CGPoint(x: frame.midX, y: frame.midY)
             gameWin.size = CGSize(width: gameWin.size.width * 3, height: gameWin.size.height * 3)
             gameWin.zPosition = 150
