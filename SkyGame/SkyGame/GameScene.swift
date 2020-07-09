@@ -25,7 +25,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let gameOver = SKSpriteNode(imageNamed: "gameOver")
     let gameWin = SKSpriteNode(imageNamed: "youWin")
     let enemies = ["iEye", "Glixino", "Havyion", "Pinclet"]
-    
+    let playerAnimate = [SKTexture(imageNamed: "0"), SKTexture(imageNamed: "1"), SKTexture(imageNamed: "2"), SKTexture(imageNamed: "3"), SKTexture(imageNamed: "4"), SKTexture(imageNamed: "5"), SKTexture(imageNamed: "6"), SKTexture(imageNamed: "7"),SKTexture(imageNamed: "8"), SKTexture(imageNamed: "9"), SKTexture(imageNamed: "10"), SKTexture(imageNamed: "11"),]
     
     var touchLocal: CGPoint = CGPoint(x: 0, y: 0)
     var jumpYes = false
@@ -55,7 +55,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func createScene(){
         player.size = CGSize(width: player.size.width / 1.5, height: player.size.height / 1.5)
-         player.position = CGPoint(x: -349, y: 10)
+         player.position = CGPoint(x: 0, y: 10)
          //Pensar nisso como layers do photoshop
          player.zPosition = background.zPosition + 1
          //Criando fisica
@@ -97,6 +97,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         touchLocal = CGPoint(x: 0, y: 0)
         didJump = false
+        player.removeAllActions()
+        player.texture = SKTexture(imageNamed: "0")
         jumpYes = false
         
     }
@@ -105,14 +107,40 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         guard let touch = touches.first else {return}
         touchLocal = touch.location(in: self)
     }
+    var timerForWalk: TimeInterval = 0
+    var didSet = false
+    
     
     override func update(_ currentTime: TimeInterval) {
         
         if rightControl.contains(touchLocal){
+            if(!didSet){
+                timerForWalk = currentTime
+                didSet = true
+            }
+            if timerForWalk <= currentTime{
+            player.run(SKAction.animate(with: playerAnimate, timePerFrame: 0.1))
+                timerForWalk = currentTime + 1.2
+                //didSet = false
+            }
             player.run(SKAction.move(to: CGPoint(x: player.position.x + 30, y: player.position.y), duration: 0.1))
+            //background.run(SKAction.moveTo(x: background.position.x - 30, duration: 0.1))
         }
         if leftControl.contains(touchLocal){
+            let playerAnimateBackwards = playerAnimate.reversed() as [SKTexture]
+            if(!didSet){
+                timerForWalk = currentTime
+                didSet = true
+            }
+            if timerForWalk <= currentTime{
+            player.run(SKAction.animate(with: playerAnimateBackwards, timePerFrame: 0.1))
+                timerForWalk = currentTime + 1.2
+                //didSet = false
+            }
             player.run(SKAction.move(to: CGPoint(x: player.position.x - 30, y: player.position.y), duration: 0.1))
+            
+            
+            //background.run(SKAction.moveTo(x: background.position.x + 30, duration: 0.1))
         }
         if(jumpControl.contains(touchLocal)){
 //            if(!didJump){
@@ -149,6 +177,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             touchLocal = CGPoint(x: 0, y: 0)
             player.removeAllActions()
             player.position.x = -350
+            player.texture = SKTexture(imageNamed: "0")
         }
         if player.position.x == -350{
             player.position.x = -349
