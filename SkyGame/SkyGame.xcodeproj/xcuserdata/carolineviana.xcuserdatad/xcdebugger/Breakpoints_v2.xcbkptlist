@@ -7,7 +7,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "B87939CD-082E-4F51-9899-A8BFE3D33F64"
+            uuid = "479A977C-9482-4191-9AC0-D56C85767E20"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -16,39 +16,39 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "205"
             endingLineNumber = "205"
-            landmarkName = "didBegin(_:)"
+            landmarkName = "reloadScreen()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "42813A06-3B06-4076-A47F-808B41B1B3A5"
-            shouldBeEnabled = "No"
+            uuid = "F5B9376D-4CE2-4673-B301-2750DA1C8759"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SkyGame/GameScene.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "195"
-            endingLineNumber = "195"
-            landmarkName = "didBegin(_:)"
+            startingLineNumber = "311"
+            endingLineNumber = "311"
+            landmarkName = "youWin()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "54254F6F-3D29-4C07-9499-E4D1AF72B44B"
-            shouldBeEnabled = "No"
+            uuid = "3E49235F-1255-49FB-9283-E81B9AE35152"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SkyGame/GameScene.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "187"
-            endingLineNumber = "187"
-            landmarkName = "didBegin(_:)"
+            startingLineNumber = "194"
+            endingLineNumber = "194"
+            landmarkName = "update(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

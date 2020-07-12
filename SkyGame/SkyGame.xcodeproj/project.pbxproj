@@ -102,8 +102,7 @@
 			isa = PBXGroup;
 			children = (
 				10188C8B24A24FE700BB2A8E /* AppDelegate.swift */,
-				10188C8D24A24FE700BB2A8E /* GameScene.sks */,
-				10188C9124A24FE700BB2A8E /* GameScene.swift */,
+				1027346E24B909BF00C724A4 /* Game */,
 				10188C9324A24FE700BB2A8E /* GameViewController.swift */,
 				10188C9524A24FE700BB2A8E /* Main.storyboard */,
 				10188C9824A24FE900BB2A8E /* Assets.xcassets */,
@@ -129,6 +128,15 @@
 				10188CB324A24FE900BB2A8E /* Info.plist */,
 			);
 			path = SkyGameUITests;
+			sourceTree = "<group>";
+		};
+		1027346E24B909BF00C724A4 /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				10188C9124A24FE700BB2A8E /* GameScene.swift */,
+				10188C8D24A24FE700BB2A8E /* GameScene.sks */,
+			);
+			path = Game;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
