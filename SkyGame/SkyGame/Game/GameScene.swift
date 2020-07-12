@@ -112,7 +112,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     
     override func update(_ currentTime: TimeInterval) {
-        
         if rightControl.contains(touchLocal){
             if(!didSet){
                 timerForWalk = currentTime
@@ -241,6 +240,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         weapon.position = CGPoint(x: player.position.x, y: player.position.y)
         weapon.zPosition = background.zPosition + 1
+        //weapon.size = CGSize(width: weapon.size.width / 2, height: weapon.size.height / 2)
         weapon.physicsBody = SKPhysicsBody(circleOfRadius: weapon.size.height / 3)
         
         weapon.physicsBody?.categoryBitMask = CollisionType.weapon.rawValue
