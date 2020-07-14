@@ -43,14 +43,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         background.position = CGPoint(x: frame.midX, y: frame.midY)
         background.size = frame.size
+        background.zPosition = -1
         addChild(background)
         
-        createScene()
         
         //Definição do chão (onde ele fica)
         physicsBody = SKPhysicsBody(edgeLoopFrom: frame.inset(by: UIEdgeInsets(top: 10, left: 0, bottom: 30, right: 0)))
         
+        
         reloadScreen()
+        createScene()
+        //let teste = SKSpriteNode(imageNamed: "person")
+       // teste.position = CGPoint(x: 0, y: 0)
+        //addChild(teste)
     }
     
     func createScene(){
