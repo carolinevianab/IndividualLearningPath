@@ -20,6 +20,7 @@
 		1027347624BD2A3500C724A4 /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1027347524BD2A3500C724A4 /* MenuController.swift */; };
 		10CCDB6024BDE337007F2425 /* endGameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 10CCDB5F24BDE337007F2425 /* endGameScene.sks */; };
 		10CCDB6224BDE422007F2425 /* EndGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10CCDB6124BDE422007F2425 /* EndGame.swift */; };
+		10CCDB6424BE2BD6007F2425 /* settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10CCDB6324BE2BD6007F2425 /* settings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,7 @@
 		1027347524BD2A3500C724A4 /* MenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
 		10CCDB5F24BDE337007F2425 /* endGameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = endGameScene.sks; sourceTree = "<group>"; };
 		10CCDB6124BDE422007F2425 /* EndGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndGame.swift; sourceTree = "<group>"; };
+		10CCDB6324BE2BD6007F2425 /* settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = settings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +146,7 @@
 			children = (
 				10188C9124A24FE700BB2A8E /* GameScene.swift */,
 				10188C8D24A24FE700BB2A8E /* GameScene.sks */,
+				10CCDB6324BE2BD6007F2425 /* settings.swift */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -295,6 +298,7 @@
 			files = (
 				1027347624BD2A3500C724A4 /* MenuController.swift in Sources */,
 				10188C9224A24FE700BB2A8E /* GameScene.swift in Sources */,
+				10CCDB6424BE2BD6007F2425 /* settings.swift in Sources */,
 				10188C9424A24FE700BB2A8E /* GameViewController.swift in Sources */,
 				10188C8C24A24FE700BB2A8E /* AppDelegate.swift in Sources */,
 				10CCDB6224BDE422007F2425 /* EndGame.swift in Sources */,
