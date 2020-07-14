@@ -52,5 +52,144 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E915B282-8073-417C-AC49-AE14E4F0A7EB"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SkyGame/EndGame.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "16"
+            endingLineNumber = "16"
+            landmarkName = "EndGame"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "FEFEA089-DAA0-447D-8141-90057000B404"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SkyGame/EndGame.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "14"
+            endingLineNumber = "14"
+            landmarkName = "EndGame"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "FEFEA089-DAA0-447D-8141-90057000B404 - 5946111a052240ad"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SkyGame.EndGame.gameStatus.getter : Swift.Optional&lt;__C.SKLabelNode&gt;"
+                  moduleName = "SkyGame"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/carolineviana/Documents/GitHub/IndividualLearningPath/SkyGame/SkyGame/EndGame.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "126">
+               </Location>
+               <Location
+                  uuid = "FEFEA089-DAA0-447D-8141-90057000B404 - 947ace03c28ecc01"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SkyGame.EndGame.gameStatus.setter : Swift.Optional&lt;__C.SKLabelNode&gt;"
+                  moduleName = "SkyGame"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/carolineviana/Documents/GitHub/IndividualLearningPath/SkyGame/SkyGame/EndGame.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "164">
+               </Location>
+               <Location
+                  uuid = "FEFEA089-DAA0-447D-8141-90057000B404 - b6466830440acd88"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SkyGame.EndGame.gameStatus.modify : Swift.Optional&lt;__C.SKLabelNode&gt;"
+                  moduleName = "SkyGame"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/carolineviana/Documents/GitHub/IndividualLearningPath/SkyGame/SkyGame/EndGame.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "18">
+               </Location>
+               <Location
+                  uuid = "FEFEA089-DAA0-447D-8141-90057000B404 - 3b79fd1809827e73"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SkyGame.EndGame.gameStatus.modify : Swift.Optional&lt;__C.SKLabelNode&gt; with unmangled suffix &quot;.resume.0&quot;"
+                  moduleName = "SkyGame"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/carolineviana/Documents/GitHub/IndividualLearningPath/SkyGame/SkyGame/EndGame.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "4">
+               </Location>
+               <Location
+                  uuid = "FEFEA089-DAA0-447D-8141-90057000B404 - 26139fd50d5b5aad"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SkyGame.EndGame.init(size: __C.CGSize) -&gt; SkyGame.EndGame"
+                  moduleName = "SkyGame"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/carolineviana/Documents/GitHub/IndividualLearningPath/SkyGame/SkyGame/EndGame.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "408">
+               </Location>
+               <Location
+                  uuid = "FEFEA089-DAA0-447D-8141-90057000B404 - 54932662f658912a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SkyGame.EndGame.init() -&gt; SkyGame.EndGame"
+                  moduleName = "SkyGame"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/carolineviana/Documents/GitHub/IndividualLearningPath/SkyGame/SkyGame/EndGame.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "345">
+               </Location>
+               <Location
+                  uuid = "FEFEA089-DAA0-447D-8141-90057000B404 - 44a1fdbdb17175e5"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SkyGame.EndGame.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;SkyGame.EndGame&gt;"
+                  moduleName = "SkyGame"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/carolineviana/Documents/GitHub/IndividualLearningPath/SkyGame/SkyGame/EndGame.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "386">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

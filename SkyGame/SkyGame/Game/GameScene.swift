@@ -26,6 +26,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let gameWin = SKSpriteNode(imageNamed: "youWin")
     let enemies = ["iEye", "Glixino", "Havyion", "Pinclet"]
     let playerAnimate = [SKTexture(imageNamed: "0"), SKTexture(imageNamed: "1"), SKTexture(imageNamed: "2"), SKTexture(imageNamed: "3"), SKTexture(imageNamed: "4"), SKTexture(imageNamed: "5"), SKTexture(imageNamed: "6"), SKTexture(imageNamed: "7"),SKTexture(imageNamed: "8"), SKTexture(imageNamed: "9"), SKTexture(imageNamed: "10"), SKTexture(imageNamed: "11"),]
+    let myScore = SKLabelNode(text: "Score: 0")
     
     var touchLocal: CGPoint = CGPoint(x: 0, y: 0)
     var jumpYes = false
@@ -35,6 +36,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var enemyNumber = 0
     var screenCount = -1
     var enemyPerLevel = 0
+    var scoreHere = 0
     
     
     
@@ -53,9 +55,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         reloadScreen()
         createScene()
-        //let teste = SKSpriteNode(imageNamed: "person")
-       // teste.position = CGPoint(x: 0, y: 0)
-        //addChild(teste)
+        
+        
+        myScore.text = "Score: \(scoreHere)"
+        myScore.position = CGPoint(x: frame.minX + 60, y: frame.maxY - 60)
+        myScore.zPosition = 100
+        addChild(myScore)
     }
     
     func createScene(){
@@ -117,6 +122,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     
     override func update(_ currentTime: TimeInterval) {
+        myScore.text = "Score: \(scoreHere)"
+        
         if rightControl.contains(touchLocal){
             if(!didSet){
                 timerForWalk = currentTime
@@ -147,35 +154,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             //background.run(SKAction.moveTo(x: background.position.x + 30, duration: 0.1))
         }
         if(jumpControl.contains(touchLocal)){
-//            if(!didJump){
-//                didJump = true
-//                jumpYes = true
-//            }
             if(lastFire + 0.3 < currentTime){
-                           lastFire = currentTime
-                           shoot()
-                       }
+                lastFire = currentTime
+                shoot()
+            }
             
         }
-
-//        if (jumpYes == true){
-//            var i = 0
-//            while i < 20 {
-//                if(rightControl.contains(touchLocal)){
-//                    persona.physicsBody?.applyImpulse(CGVector(dx: persona.physicsBody?.velocity.dx ?? 0, dy: 50))
-//                }
-//                else {
-//                    persona.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 50))
-//                }
-//                i = i + 1
-//            }
-            //jumpYes = false
-//            if(lastFire + 0.3 < currentTime){
-//                lastFire = currentTime
-//                shoot()
-//            }
-//
-//        }
          
         if(player.position.x >= 350){
             touchLocal = CGPoint(x: 0, y: 0)
@@ -304,27 +288,29 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func gameOverDead(){
         isPlayerAlive = false
         print("lol dead")
-        gameOver.position = CGPoint(x: frame.midX, y: frame.midY)
-        gameOver.size = CGSize(width: gameOver.size.width * 3, height: gameOver.size.height * 3)
-        gameOver.zPosition = 150
-        addChild(gameOver)
+        self.removeAllChildren()
         
-        self.removeChildren(in: [jumpControl, rightControl, leftControl])
+        endGame(endStatus: "Game Over!")
 
     }
     var i = 0
     func youWin(){
         
         if(i == 0){
-            self.removeAllChildren()
-            gameWin.position = CGPoint(x: frame.midX, y: frame.midY)
-            gameWin.size = CGSize(width: gameWin.size.width * 3, height: gameWin.size.height * 3)
-            gameWin.zPosition = 150
-            addChild(gameWin)
-            self.removeChildren(in: [jumpControl, rightControl, leftControl])
-
+           endGame(endStatus: "You win!")
             i+=1
         }
         
+    }
+    
+    func endGame(endStatus: String){
+        self.removeAllChildren()
+        let ble = EndGame()
+        ble.defalts.set(endStatus, forKey: "Message")
+        ble.defalts.set(scoreHere, forKey: "Score")
+        
+        let transition = SKTransition.flipHorizontal(withDuration: 0.5)
+        let bla = GameScene(fileNamed: "endGameScene") ?? GameScene(size: self.size)
+        self.view?.presentScene(bla, transition: transition)
     }
 }
