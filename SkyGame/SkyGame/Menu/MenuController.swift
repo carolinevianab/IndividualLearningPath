@@ -9,13 +9,12 @@
 import SpriteKit
 
 class MenuController: SKScene {
+    let defalts = UserDefaults.standard
     var startgame: SKSpriteNode!
     var startGameEndless: SKSpriteNode!
-    var defalts = UserDefaults.standard
     
     override func didMove(to view: SKView) {
         startgame = (self.childNode(withName: "bntStartNormal") as! SKSpriteNode)
-        
         startGameEndless = (self.childNode(withName: "bntStartEndless") as! SKSpriteNode)
         
     }

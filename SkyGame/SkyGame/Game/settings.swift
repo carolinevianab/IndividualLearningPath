@@ -17,9 +17,10 @@ extension GameScene {
     
     enum zPositions: CGFloat {
         case background = 0
-        case gameArea = 2
-        case controls = 4
-        case labels = 6
+        case gameAreabutBehind = 2
+        case gameArea = 4
+        case controls = 6
+        case labels = 8
     }
     
 }
