@@ -13,6 +13,7 @@ extension GameScene {
         case player = 2
         case enemy = 4
         case weapon = 8
+        case plant = 16
     }
     
     enum zPositions: CGFloat {

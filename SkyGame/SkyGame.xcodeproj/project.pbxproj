@@ -21,6 +21,8 @@
 		10CCDB6024BDE337007F2425 /* endGameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 10CCDB5F24BDE337007F2425 /* endGameScene.sks */; };
 		10CCDB6224BDE422007F2425 /* EndGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10CCDB6124BDE422007F2425 /* EndGame.swift */; };
 		10CCDB6424BE2BD6007F2425 /* settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10CCDB6324BE2BD6007F2425 /* settings.swift */; };
+		10D2CEF224C0F439002284F4 /* fireball.sks in Resources */ = {isa = PBXBuildFile; fileRef = 10D2CEF124C0F439002284F4 /* fireball.sks */; };
+		10D2CEF424C0FD2D002284F4 /* iceball.sks in Resources */ = {isa = PBXBuildFile; fileRef = 10D2CEF324C0FD2D002284F4 /* iceball.sks */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +63,8 @@
 		10CCDB5F24BDE337007F2425 /* endGameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = endGameScene.sks; sourceTree = "<group>"; };
 		10CCDB6124BDE422007F2425 /* EndGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndGame.swift; sourceTree = "<group>"; };
 		10CCDB6324BE2BD6007F2425 /* settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = settings.swift; sourceTree = "<group>"; };
+		10D2CEF124C0F439002284F4 /* fireball.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = fireball.sks; sourceTree = "<group>"; };
+		10D2CEF324C0FD2D002284F4 /* iceball.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = iceball.sks; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +123,8 @@
 				10188C9824A24FE900BB2A8E /* Assets.xcassets */,
 				10188C9A24A24FE900BB2A8E /* LaunchScreen.storyboard */,
 				10188C9D24A24FE900BB2A8E /* Info.plist */,
+				10D2CEF124C0F439002284F4 /* fireball.sks */,
+				10D2CEF324C0FD2D002284F4 /* iceball.sks */,
 			);
 			path = SkyGame;
 			sourceTree = "<group>";
@@ -268,9 +274,11 @@
 			files = (
 				10188C9724A24FE700BB2A8E /* Main.storyboard in Resources */,
 				10188C8E24A24FE700BB2A8E /* GameScene.sks in Resources */,
+				10D2CEF224C0F439002284F4 /* fireball.sks in Resources */,
 				10CCDB6024BDE337007F2425 /* endGameScene.sks in Resources */,
 				10188C9924A24FE900BB2A8E /* Assets.xcassets in Resources */,
 				1027347424BD2A0B00C724A4 /* MenuScene.sks in Resources */,
+				10D2CEF424C0FD2D002284F4 /* iceball.sks in Resources */,
 				10188C9C24A24FE900BB2A8E /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

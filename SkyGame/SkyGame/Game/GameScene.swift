@@ -22,6 +22,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     // Labels
     let myScore = SKLabelNode(text: "Score: 0")
     let roomNumber = SKLabelNode(text: "Room: 0")
+    let ammoF = SKLabelNode(text: "0")
+    let ammoI = SKLabelNode(text: "0")
     
     // Arrays
     let backgrounds = ["ground1", "ground2", "ground3"]
@@ -43,6 +45,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var enemyPerLevel = 0 // how many enemies each level will have
     var screenCount: Int = 0 // how many screens player passed throught
     var scoreHere = 0 //Score
+    var fireAmmo = 2
+    var iceAmmo = 2
     
     // MARK: didMove
     override func didMove(to view: SKView) {
@@ -57,6 +61,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         screenCount = defalts.integer(forKey: Keys.endlessMode)
         
         createScene()
+        
+        if(defalts.integer(forKey: Keys.endlessMode) == -1000){
+            enemyPerLevel = 1
+        }
+        
         reloadScreen()
     }
     
@@ -78,6 +87,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     // MARK: update
     override func update(_ currentTime: TimeInterval) {
         myScore.text = "Score: \(scoreHere)"
+        ammoF.text = "\(fireAmmo)"
+        ammoI.text = "\(iceAmmo)"
         
         if(defalts.integer(forKey: Keys.endlessMode) == -1000){
             roomNumber.text = "Room \(screenCount + 1000)"
@@ -147,7 +158,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             generateBackground()
         }
         
-        if(isPlayerAlive && screenCount == 10){
+        if(isPlayerAlive && screenCount == 11){
             youWin()
         }
         
@@ -184,6 +195,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             plantSprite.position = CGPoint(x: randomPosition, y: 0)
             plantSprite.zPosition = zPositions.gameAreabutBehind.rawValue
             plantSprite.name = plant
+            
+            plantSprite.physicsBody = SKPhysicsBody(circleOfRadius: plantSprite.size.height / 2)
+            plantSprite.physicsBody?.affectedByGravity = false
+            plantSprite.physicsBody?.categoryBitMask = CollisionType.plant.rawValue
+            plantSprite.physicsBody?.collisionBitMask = CollisionType.ground.rawValue
+            plantSprite.physicsBody?.contactTestBitMask = CollisionType.player.rawValue
+            
             addChild(plantSprite)
             counter += 1
         }
@@ -250,6 +268,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         roomNumber.horizontalAlignmentMode = .right
         roomNumber.name = "RoomNumber"
         addChild(roomNumber)
+        
+        ammoF.text = "\(fireAmmo)"
+        ammoF.fontColor = .systemRed
+        ammoF.fontName = "Helvetica Neue Bold"
+        ammoF.fontSize = 30
+        ammoF.position = CGPoint(x: changeWeaponControl.position.x + 40, y: changeWeaponControl.position.y + 5)
+        ammoF.zPosition = zPositions.labels.rawValue
+        addChild(ammoF)
+        
+        ammoI.text = "\(iceAmmo)"
+        ammoI.fontColor = .systemBlue
+        ammoI.fontName = "Helvetica Neue Bold"
+        ammoI.fontSize = 30
+        ammoI.position = CGPoint(x: changeWeaponControl.position.x + 40, y: changeWeaponControl.position.y - 25)
+        ammoI.zPosition = zPositions.labels.rawValue
+        addChild(ammoI)
     }
 
     // MARK: ReloadScreen
@@ -261,8 +295,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if(enemyNumber == 0){
             screenCount += 1
             if(defalts.integer(forKey: Keys.endlessMode) == -1000){
-                enemyPerLevel = Int.random(in: 1...5)
                 makeEnemy()
+                enemyPerLevel = Int.random(in: 1...5)
             }
             else{
                 if(screenCount == 1 || screenCount == 4 || screenCount == 7){
@@ -336,19 +370,28 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func shoot(){
         guard isPlayerAlive else {return}
         
+        if weaponStatus && fireAmmo == 0 {return}
+        if !weaponStatus && iceAmmo == 0 {return}
+        
         let weapon = SKSpriteNode(imageNamed: "pewpew")
         
         weapon.position = CGPoint(x: player.position.x, y: player.position.y - 20)
         weapon.zPosition = zPositions.gameArea.rawValue
         weapon.physicsBody = SKPhysicsBody(circleOfRadius: weapon.size.height / 3)
         
+        let emitter: SKEmitterNode!
+        
         if(weaponStatus){
             weapon.color = .systemRed
             weapon.colorBlendFactor = 0.9
+            emitter = SKEmitterNode(fileNamed: "fireball")
+            fireAmmo -= 1
         }
         else{
             weapon.color = .systemBlue
             weapon.colorBlendFactor = 0.9
+            emitter = SKEmitterNode(fileNamed: "iceball")
+            iceAmmo -= 1
         }
         
         weapon.physicsBody?.categoryBitMask = CollisionType.weapon.rawValue
@@ -361,10 +404,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(weapon)
         weapon.physicsBody?.applyImpulse(CGVector(dx: 150, dy: 0))
         
+//        let emitter = SKEmitterNode(fileNamed: "fireball")!
+        emitter.zPosition = zPositions.gameArea.rawValue
+        emitter.position = CGPoint(x: 0, y: 0)
+        emitter.name = "emitter"
+        //addChild(emitter)
+        weapon.addChild(emitter)
+        
+        
         let wait = SKAction.wait(forDuration: 0.1)
+        //let waitEm = SKAction.wait(forDuration: 1)
         let remove = SKAction.removeFromParent()
         weapon.run(SKAction.sequence([wait, remove]))
+        //emitter.run(SKAction.sequence([waitEm, remove]))
     }
+    
     
     // MARK: didBegin
     func didBegin(_ contact: SKPhysicsContact) {
@@ -374,11 +428,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let sortedNodes = [nodeA, nodeB].sorted {$0.name ?? "" <  $1.name ?? ""}
         // Ordem alfabética:
         //Scene (literally)
+        //ayezi
         //Glixino
         //Havyion
         //iEye
         //Pinclet
         //player
+        //vatra
         //weapon
         
         let firstNode = sortedNodes[0]
@@ -396,6 +452,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if firstNode.name == "Glixino" || firstNode.name == "Havyion" || firstNode.name == "iEye" || firstNode.name == "Pinclet" {
                 gameOverDead()
                 secondNode.removeFromParent()
+            }
+            
+            if firstNode.name == "ayezi" && iceAmmo < 3 {
+                firstNode.removeFromParent()
+                iceAmmo += 1
             }
             
         }
@@ -447,6 +508,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 secondNode.removeFromParent()
                 print("aaaaa")
                 break;
+            }
+        }
+        else if firstNode.name == "player"{
+            if secondNode.name == "vatra" && fireAmmo < 3{
+                secondNode.removeFromParent()
+                fireAmmo += 1
             }
         }
     }
