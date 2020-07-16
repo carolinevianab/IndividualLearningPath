@@ -15,6 +15,13 @@ extension GameScene {
         case weapon = 8
     }
     
+    enum zPositions: CGFloat {
+        case background = 0
+        case gameArea = 2
+        case controls = 4
+        case labels = 6
+    }
+    
 }
 
 extension SKScene {

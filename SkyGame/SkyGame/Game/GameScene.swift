@@ -41,7 +41,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         background.position = CGPoint(x: frame.midX, y: frame.midY)
         background.size = frame.size
-        background.zPosition = -1
+        background.zPosition = zPositions.background.rawValue
         addChild(background)
         
         //Definição do chão (onde ele fica)
@@ -55,12 +55,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         myScore.text = "Score: \(scoreHere)"
         myScore.position = CGPoint(x: frame.minX + 10, y: frame.maxY - 60)
         myScore.horizontalAlignmentMode = .left
-        myScore.zPosition = 100
+        myScore.zPosition = zPositions.labels.rawValue
         addChild(myScore)
         
         roomNumber.text = "Room \(screenCount)"
         roomNumber.position = CGPoint(x: frame.maxX - 10, y: frame.maxY - 60)
-        roomNumber.zPosition = 100
+        roomNumber.zPosition = zPositions.labels.rawValue
         roomNumber.horizontalAlignmentMode = .right
         addChild(roomNumber)
     }
@@ -178,7 +178,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
 
          //Pensar nisso como layers do photoshop
-         player.zPosition = background.zPosition + 1
+        player.zPosition = zPositions.gameArea.rawValue
          //Criando fisica
          player.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 100, height: player.frame.height))
          addChild(player)
@@ -192,23 +192,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
          player.name = "player"
          
          leftControl.position = CGPoint(x: frame.minX + leftControl.size.width / 2, y: frame.minY + leftControl.size.height / 2)
-         leftControl.zPosition = 100
+        leftControl.zPosition = zPositions.controls.rawValue
          leftControl.name = "leftControl"
          addChild(leftControl)
         
          rightControl.position = CGPoint(x: frame.minX + rightControl.size.width / 2 + leftControl.size.width, y: frame.minY + rightControl.size.height / 2)
-         rightControl.zPosition = 100
+        rightControl.zPosition = zPositions.controls.rawValue
          rightControl.name = "rightControl"
          addChild(rightControl)
          
          shootControl.position = CGPoint(x: frame.maxX - shootControl.size.width / 2, y: frame.minY + shootControl.size.height / 2)
-         shootControl.zPosition = 100
+        shootControl.zPosition = zPositions.controls.rawValue
          shootControl.name = "shootControl"
          addChild(shootControl)
         
         changeWeaponControl.size = CGSize(width: changeWeaponControl.size.width / 1.5, height: changeWeaponControl.size.height / 1.5)
         changeWeaponControl.position = CGPoint(x: shootControl.position.x - shootControl.size.width, y: shootControl.position.y)
-        changeWeaponControl.zPosition = 100
+        changeWeaponControl.zPosition = zPositions.controls.rawValue
         changeWeaponControl.color = UIColor(red: 255, green: 0, blue: 0, alpha: 1)
         changeWeaponControl.colorBlendFactor = 0.9
         addChild(changeWeaponControl)
@@ -250,7 +250,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
             
             enemy.position = CGPoint(x: m, y: 0)
-            enemy.zPosition = background.zPosition + 1
+            enemy.zPosition = zPositions.gameArea.rawValue
             enemy.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: enemy.size.width, height: enemy.size.height))
             enemy.physicsBody?.categoryBitMask = CollisionType.enemy.rawValue
             enemy.physicsBody?.collisionBitMask = CollisionType.player.rawValue
@@ -301,7 +301,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let weapon = SKSpriteNode(imageNamed: "pewpew")
         
         weapon.position = CGPoint(x: player.position.x, y: player.position.y - 20)
-        weapon.zPosition = background.zPosition + 1
+        weapon.zPosition = zPositions.gameArea.rawValue
         //weapon.size = CGSize(width: weapon.size.width / 2, height: weapon.size.height / 2)
         weapon.physicsBody = SKPhysicsBody(circleOfRadius: weapon.size.height / 3)
         
