@@ -31,8 +31,8 @@ class EndGame: SKScene {
         
         if nodesArray.first?.name == "bntMenu"{
             let transition = SKTransition.flipHorizontal(withDuration: 0.5)
-            let bla = GameScene(fileNamed: "MenuScene") ?? GameScene(size: self.size)
-            self.view?.presentScene(bla, transition: transition)
+            let mainMenu = GameScene(fileNamed: "MenuScene") ?? GameScene(size: self.size)
+            self.view?.presentScene(mainMenu, transition: transition)
         }
     }
 }

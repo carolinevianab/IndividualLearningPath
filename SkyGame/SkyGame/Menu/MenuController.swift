@@ -10,9 +10,13 @@ import SpriteKit
 
 class MenuController: SKScene {
     var startgame: SKSpriteNode!
+    var startGameEndless: SKSpriteNode!
+    var defalts = UserDefaults.standard
     
     override func didMove(to view: SKView) {
-        startgame = (self.childNode(withName: "bntStart") as! SKSpriteNode)
+        startgame = (self.childNode(withName: "bntStartNormal") as! SKSpriteNode)
+        
+        startGameEndless = (self.childNode(withName: "bntStartEndless") as! SKSpriteNode)
         
     }
     
@@ -22,10 +26,18 @@ class MenuController: SKScene {
         
         let nodesArray = self.nodes(at: touchLocal)
         
-        if nodesArray.first?.name == "bntStart"{
+        if nodesArray.first?.name == "bntStartNormal"{
+            defalts.set(-1, forKey: "EndlessMode")
             let transition = SKTransition.flipHorizontal(withDuration: 0.5)
-            let bla = GameScene(fileNamed: "GameScene") ?? GameScene(size: self.size)
-            self.view?.presentScene(bla, transition: transition)
+            let intoGame = GameScene(fileNamed: "GameScene") ?? GameScene(size: self.size)
+            self.view?.presentScene(intoGame, transition: transition)
+        }
+        else if nodesArray.first?.name == "bntStartEndless" {
+            defalts.set(-1000, forKey: "EndlessMode")
+            
+            let transition = SKTransition.flipHorizontal(withDuration: 0.5)
+            let intoGameEndless = GameScene(fileNamed: "GameScene") ?? GameScene(size: self.size)
+            self.view?.presentScene(intoGameEndless, transition: transition)
         }
     }
 
