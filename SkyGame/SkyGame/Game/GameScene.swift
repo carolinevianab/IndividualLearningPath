@@ -47,7 +47,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //Definição do chão (onde ele fica)
         physicsBody = SKPhysicsBody(edgeLoopFrom: frame.inset(by: UIEdgeInsets(top: 10, left: 0, bottom: 30, right: 0)))
         
-        screenCount = defalts.integer(forKey: "EndlessMode")
+        screenCount = defalts.integer(forKey: Keys.endlessMode)
         
         createScene()
         reloadScreen()
@@ -84,7 +84,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func update(_ currentTime: TimeInterval) {
         myScore.text = "Score: \(scoreHere)"
         
-        if(defalts.integer(forKey: "EndlessMode") == -1000){
+        if(defalts.integer(forKey: Keys.endlessMode) == -1000){
             roomNumber.text = "Room \(screenCount + 1000)"
         }
         else{
@@ -170,7 +170,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func createScene(){
         player.size = CGSize(width: player.size.width / 1.5, height: player.size.height / 1.5)
         
-        if(defalts.integer(forKey: "EndlessMode") == -1000){
+        if(defalts.integer(forKey: Keys.endlessMode) == -1000){
             player.position = CGPoint(x: -350, y: 10)
         }
         else{
@@ -218,7 +218,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func reloadScreen(){
         if(enemyNumber == 0){
             screenCount += 1
-            if(defalts.integer(forKey: "EndlessMode") == -1000){
+            if(defalts.integer(forKey: Keys.endlessMode) == -1000){
                 enemyPerLevel = Int.random(in: 1...5)
                 makeEnemy()
             }
@@ -429,8 +429,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     // MARK: EndGame
     func endGame(endStatus: String){
         self.removeAllChildren()
-        defalts.set(endStatus, forKey: "Message")
-        defalts.set(scoreHere, forKey: "Score")
+        defalts.set(endStatus, forKey: Keys.message)
+        defalts.set(scoreHere, forKey: Keys.score)
+        
+//        if(defalts.integer(forKey: Keys.endlessMode) == -1000){
+//                   roomNumber.text = "Room \(screenCount + 1000)"
+//               }
+//               else{
+//                   roomNumber.text = "Room \(screenCount)"
+//               }
+        
+        if defalts.integer(forKey: Keys.endlessMode) == -1000{
+            defalts.set("Rooms: \(screenCount + 1000)", forKey: Keys.rooms)
+        }
+        else{
+            defalts.set("Rooms: \(screenCount)/10", forKey: Keys.rooms)
+        }
+        
+        
+        
+        
         
         let transition = SKTransition.flipHorizontal(withDuration: 0.5)
         let endScene = GameScene(fileNamed: "endGameScene") ?? GameScene(size: self.size)

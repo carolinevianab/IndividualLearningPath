@@ -12,15 +12,18 @@ class EndGame: SKScene {
     var bntMenu: SKSpriteNode!
     var lblScore: SKLabelNode!
     var gameStatus: SKLabelNode!
+    var roomsPassed: SKLabelNode!
     var defalts = UserDefaults.standard
     
     override func didMove(to view: SKView) {
         bntMenu = (self.childNode(withName: "bntMenu") as! SKSpriteNode)
         lblScore = (self.childNode(withName: "lblScore") as! SKLabelNode)
         gameStatus = (self.childNode(withName: "lblGameStatus") as! SKLabelNode)
+        roomsPassed = (self.childNode(withName: "Rooms") as! SKLabelNode)
         
-        gameStatus.text = defalts.string(forKey: "Message") ?? "help"
-        lblScore.text = String(defalts.integer(forKey: "Score"))
+        gameStatus.text = defalts.string(forKey: Keys.message) ?? "help"
+        lblScore.text = String(defalts.integer(forKey: Keys.score))
+        roomsPassed.text = defalts.string(forKey: Keys.rooms)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

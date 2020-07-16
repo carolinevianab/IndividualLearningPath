@@ -27,13 +27,13 @@ class MenuController: SKScene {
         let nodesArray = self.nodes(at: touchLocal)
         
         if nodesArray.first?.name == "bntStartNormal"{
-            defalts.set(-1, forKey: "EndlessMode")
+            defalts.set(-1, forKey: Keys.endlessMode)
             let transition = SKTransition.flipHorizontal(withDuration: 0.5)
             let intoGame = GameScene(fileNamed: "GameScene") ?? GameScene(size: self.size)
             self.view?.presentScene(intoGame, transition: transition)
         }
         else if nodesArray.first?.name == "bntStartEndless" {
-            defalts.set(-1000, forKey: "EndlessMode")
+            defalts.set(-1000, forKey: Keys.endlessMode)
             
             let transition = SKTransition.flipHorizontal(withDuration: 0.5)
             let intoGameEndless = GameScene(fileNamed: "GameScene") ?? GameScene(size: self.size)

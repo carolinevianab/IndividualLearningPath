@@ -15,15 +15,15 @@ extension GameScene {
         case weapon = 8
     }
     
-    struct EnemyType {
-        let name: String
-        let weaponImunity: String
-        let enemyTexture: SKSpriteNode
-        
-    }
+}
 
-    
-    
+extension SKScene {
+    struct Keys {
+        static let endlessMode = "EndlessMode"
+        static let message =  "Message"
+        static let score = "Score"
+        static let rooms = "Rooms"
+    }
 }
 
 
