@@ -194,7 +194,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     // MARK: GeneratePlants
     func generatePlants(){
-        let numberOfPlants = Int.random(in: 1...3)
+        let numberOfPlants = Int.random(in: 1...4)
         var counter = 0
         
         while(counter < numberOfPlants){
@@ -216,7 +216,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         counter = 0
         while(counter < numberOfPlants + 3){
-            let randomPosition1 = Int.random(in: -350...350)
+            let randomPosition1 = Int.random(in: -400...400)
             let randomPosition2 = Int.random(in: 80...90)
             let tree = SKSpriteNode(imageNamed: "tree")
             tree.position = CGPoint(x: randomPosition1, y: randomPosition2)
