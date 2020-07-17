@@ -29,6 +29,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let backgrounds = ["ground1", "ground2", "ground3"]
     let enemies = ["iEye", "Glixino", "Havyion", "Pinclet"]
     let plants = ["vatra", "ayezi"]
+    let shooting = [SKTexture(imageNamed: "shoot1"), SKTexture(imageNamed: "shoot2"), SKTexture(imageNamed: "shoot3"), SKTexture(imageNamed: "shoot3")]
     let playerAnimate = [SKTexture(imageNamed: "0"), SKTexture(imageNamed: "1"), SKTexture(imageNamed: "2"), SKTexture(imageNamed: "3"), SKTexture(imageNamed: "4"), SKTexture(imageNamed: "5"), SKTexture(imageNamed: "6"), SKTexture(imageNamed: "7"),SKTexture(imageNamed: "8"), SKTexture(imageNamed: "9"), SKTexture(imageNamed: "10"), SKTexture(imageNamed: "11"),]
 
     // booleans
@@ -48,6 +49,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var fireAmmo = 2
     var iceAmmo = 2
     
+    
     // MARK: didMove
     override func didMove(to view: SKView) {
         physicsWorld.contactDelegate = self
@@ -60,6 +62,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         screenCount = defalts.integer(forKey: Keys.endlessMode)
         
+        
         createScene()
         
         if(defalts.integer(forKey: Keys.endlessMode) == -1000){
@@ -71,6 +74,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     // MARK: touchesEnded
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if shootControl.contains(touchLocal){
+            let shootEnded = shooting.reversed()  as [SKTexture]
+            player.run(SKAction.animate(with: shootEnded, timePerFrame: 0.01))
+            
+        }
+        
         touchLocal = CGPoint(x: 0, y: 0)
         player.removeAllActions()
         player.texture = SKTexture(imageNamed: "0")
@@ -205,6 +214,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             addChild(plantSprite)
             counter += 1
         }
+        counter = 0
+        while(counter < numberOfPlants + 3){
+            let randomPosition1 = Int.random(in: -350...350)
+            let randomPosition2 = Int.random(in: 80...90)
+            let tree = SKSpriteNode(imageNamed: "tree")
+            tree.position = CGPoint(x: randomPosition1, y: randomPosition2)
+            tree.zPosition = zPositions.background.rawValue + 1
+            tree.name = "tree"
+            addChild(tree)
+            counter += 1
+        }
+        
+        
     }
     
     // MARK: CreateScene
@@ -292,6 +314,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             childNode(withName: "vatra")?.removeFromParent()
             childNode(withName: "ayezi")?.removeFromParent()
         }
+        while childNode(withName: "tree") != nil {
+            childNode(withName: "tree")?.removeFromParent()
+        }
         if(enemyNumber == 0){
             screenCount += 1
             if(defalts.integer(forKey: Keys.endlessMode) == -1000){
@@ -369,6 +394,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     // MARK: Shoot
     func shoot(){
         guard isPlayerAlive else {return}
+        
+        player.run(SKAction.animate(with: shooting, timePerFrame: 0.01))
         
         if weaponStatus && fireAmmo == 0 {return}
         if !weaponStatus && iceAmmo == 0 {return}
