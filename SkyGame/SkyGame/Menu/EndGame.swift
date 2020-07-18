@@ -32,7 +32,7 @@ class EndGame: SKScene {
         
         let nodesArray = self.nodes(at: touchLocal)
         
-        if nodesArray.first?.name == "bntMenu"{
+        if nodesArray.first?.name == "bntMenu" {
             let transition = SKTransition.flipHorizontal(withDuration: 0.5)
             let mainMenu = GameScene(fileNamed: "MenuScene") ?? GameScene(size: self.size)
             self.view?.presentScene(mainMenu, transition: transition)

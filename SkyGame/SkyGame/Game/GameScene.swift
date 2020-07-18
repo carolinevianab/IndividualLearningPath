@@ -40,6 +40,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     // Other variables
     var touchLocal: CGPoint = CGPoint(x: 0, y: 0) // where were touched
+    var touchLocal2: CGPoint = CGPoint(x: 0, y: 0)
     var lastFire: Double = 0 // last time the gun fired
     var timerForWalk: TimeInterval = 0 // For walking animation
     var enemyNumber = 0 // how many enemies are left
@@ -65,7 +66,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         createScene()
         
-        if(defalts.integer(forKey: Keys.endlessMode) == -1000){
+        if defalts.integer(forKey: Keys.endlessMode) == -1000 {
             enemyPerLevel = 1
         }
         
@@ -74,13 +75,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     // MARK: touchesEnded
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if shootControl.contains(touchLocal){
+        if shootControl.contains(touchLocal) {
             let shootEnded = shooting.reversed()  as [SKTexture]
             player.run(SKAction.animate(with: shootEnded, timePerFrame: 0.01))
             
         }
         
         touchLocal = CGPoint(x: 0, y: 0)
+        touchLocal2 = CGPoint(x: 0, y: 0)
         player.removeAllActions()
         player.texture = SKTexture(imageNamed: "0")
         didChange = false
@@ -91,6 +93,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else {return}
         touchLocal = touch.location(in: self)
+        var help = touches
+        help.removeFirst()
+        guard let touchs = help.first else {return}
+        touchLocal2 = touchs.location(in: self)
+        help.removeAll()
     }
     
     // MARK: update
@@ -99,15 +106,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         ammoF.text = "\(fireAmmo)"
         ammoI.text = "\(iceAmmo)"
         
-        if(defalts.integer(forKey: Keys.endlessMode) == -1000){
+        if defalts.integer(forKey: Keys.endlessMode) == -1000 {
             roomNumber.text = "Room \(screenCount + 1000)"
         }
-        else{
+        else {
             roomNumber.text = "Room \(screenCount)"
         }
         
-        if rightControl.contains(touchLocal){
-            if(!didSet){
+        if rightControl.contains(touchLocal) || rightControl.contains(touchLocal2) {
+            if !didSet {
                 timerForWalk = currentTime
                 didSet = true
             }
@@ -118,9 +125,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             player.run(SKAction.move(to: CGPoint(x: player.position.x + 30, y: player.position.y), duration: 0.1))
         }
         
-        if leftControl.contains(touchLocal){
+        if leftControl.contains(touchLocal) || leftControl.contains(touchLocal2) {
             let playerAnimateBackwards = playerAnimate.reversed() as [SKTexture]
-            if(!didSet){
+            if !didSet {
                 timerForWalk = currentTime
                 didSet = true
             }
@@ -131,21 +138,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             player.run(SKAction.move(to: CGPoint(x: player.position.x - 30, y: player.position.y), duration: 0.1))
         }
         
-        if(shootControl.contains(touchLocal)){
-            if(lastFire + 0.3 < currentTime){
+        if shootControl.contains(touchLocal) || shootControl.contains(touchLocal2) {
+            if lastFire + 0.3 < currentTime {
                 lastFire = currentTime
                 shoot()
             }
         }
         
-        if(changeWeaponControl.contains(touchLocal)){
-            if(!didChange){
+        if changeWeaponControl.contains(touchLocal) || changeWeaponControl.contains(touchLocal2) {
+            if !didChange {
                 weaponStatus.toggle()
-                if(weaponStatus){
+                if weaponStatus {
                     changeWeaponControl.color = .systemRed
                     changeWeaponControl.colorBlendFactor = 0.9
                 }
-                else{
+                else {
                     changeWeaponControl.color = .systemBlue
                     changeWeaponControl.colorBlendFactor = 0.9
                 }
@@ -154,7 +161,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
         }
          
-        if(player.position.x >= 350){
+        if player.position.x >= 350 {
             touchLocal = CGPoint(x: 0, y: 0)
             player.removeAllActions()
             player.position.x = -350
@@ -167,7 +174,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             generateBackground()
         }
         
-        if(isPlayerAlive && screenCount == 11){
+        if isPlayerAlive && screenCount == 11 {
             youWin()
         }
         
@@ -234,10 +241,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func createScene(){
         player.size = CGSize(width: player.size.width / 1.5, height: player.size.height / 1.5)
         
-        if(defalts.integer(forKey: Keys.endlessMode) == -1000){
+        if defalts.integer(forKey: Keys.endlessMode) == -1000 {
             player.position = CGPoint(x: -350, y: 10)
         }
-        else{
+        else {
             player.position = CGPoint(x: 0, y: 10)
         }
         
@@ -320,14 +327,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         while childNode(withName: "tree") != nil {
             childNode(withName: "tree")?.removeFromParent()
         }
-        if(enemyNumber == 0){
+        if enemyNumber == 0 {
             screenCount += 1
-            if(defalts.integer(forKey: Keys.endlessMode) == -1000){
+            if defalts.integer(forKey: Keys.endlessMode) == -1000 {
                 makeEnemy()
                 enemyPerLevel = Int.random(in: 1...4)
             }
-            else{
-                if(screenCount == 1 || screenCount == 4 || screenCount == 7){
+            else {
+                if screenCount == 1 || screenCount == 4 || screenCount == 7 {
                     enemyPerLevel += 1
                 }
                 makeEnemy()
@@ -345,7 +352,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             let enemyPosition = Int.random(in: -100 ... 300)
             
-            if choice == "Pinclet"{
+            if choice == "Pinclet" {
                 enemy.size = CGSize(width: enemy.size.width / 1.5, height: enemy.size.height / 1.5)
             }
             
@@ -358,7 +365,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             enemy.name = choice
             enemy.physicsBody?.mass = 1
             enemy.physicsBody?.friction = 0.1
-            if(choice == "Havyion"){
+            if choice == "Havyion" {
                 enemy.physicsBody?.affectedByGravity = false
             }
             addChild(enemy)
@@ -411,13 +418,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         let emitter: SKEmitterNode!
         
-        if(weaponStatus){
+        if weaponStatus {
             weapon.color = .systemRed
             weapon.colorBlendFactor = 0.9
             emitter = SKEmitterNode(fileNamed: "fireball")
             fireAmmo -= 1
         }
-        else{
+        else {
             weapon.color = .systemBlue
             weapon.colorBlendFactor = 0.9
             emitter = SKEmitterNode(fileNamed: "iceball")
@@ -493,7 +500,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         else if secondNode.name == "weapon" {
             guard isPlayerAlive else {return}
             
-            if firstNode.name == "enemy"{
+            if firstNode.name == "enemy" {
                 firstNode.removeFromParent()
                 secondNode.removeFromParent()
                 enemyNumber -= 1
@@ -525,7 +532,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 enemyNumber -= 1
                 break;
             case "Pinclet":
-                if weaponStatus == false{
+                if weaponStatus == false {
                     scoreHere += 10
                 }
                 firstNode.removeAllActions()
@@ -540,8 +547,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 break;
             }
         }
-        else if firstNode.name == "player"{
-            if secondNode.name == "vatra" && fireAmmo < 3{
+        else if firstNode.name == "player" {
+            if secondNode.name == "vatra" && fireAmmo < 3 {
                 secondNode.removeFromParent()
                 fireAmmo += 1
             }
@@ -567,10 +574,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         defalts.set(endStatus, forKey: Keys.message)
         defalts.set(scoreHere, forKey: Keys.score)
         
-        if defalts.integer(forKey: Keys.endlessMode) == -1000{
+        if defalts.integer(forKey: Keys.endlessMode) == -1000 {
             defalts.set("Rooms: \(screenCount + 1000)", forKey: Keys.rooms)
         }
-        else{
+        else {
             defalts.set("Rooms: \(screenCount)/10", forKey: Keys.rooms)
         }
         

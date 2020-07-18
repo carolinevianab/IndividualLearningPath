@@ -63,7 +63,7 @@ class MenuController: SKScene {
         
         let nodesArray = self.nodes(at: touchLocal)
         
-        if nodesArray.first?.name == "bntStartNormal"{
+        if nodesArray.first?.name == "bntStartNormal" {
             defalts.set(-1, forKey: Keys.endlessMode)
             let transition = SKTransition.flipHorizontal(withDuration: 0.5)
             let intoGame = GameScene(fileNamed: "GameScene") ?? GameScene(size: self.size)
