@@ -198,14 +198,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         var counter = 0
         
         while(counter < numberOfPlants){
-            let randomPosition = Int.random(in: -200...200)
+            let randomPosition = Int.random(in: -300...300)
             let plant = plants.randomElement()!
             let plantSprite = SKSpriteNode(imageNamed: plant)
             plantSprite.position = CGPoint(x: randomPosition, y: 0)
             plantSprite.zPosition = zPositions.gameAreabutBehind.rawValue
             plantSprite.name = plant
             
-            plantSprite.physicsBody = SKPhysicsBody(circleOfRadius: plantSprite.size.height / 2)
+            //plantSprite.physicsBody = SKPhysicsBody(circleOfRadius: plantSprite.size.height / 2)
+            plantSprite.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: plantSprite.size.width / 2, height: plantSprite.size.height))
             plantSprite.physicsBody?.affectedByGravity = false
             plantSprite.physicsBody?.categoryBitMask = CollisionType.plant.rawValue
             plantSprite.physicsBody?.collisionBitMask = CollisionType.ground.rawValue
@@ -282,6 +283,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         myScore.horizontalAlignmentMode = .left
         myScore.zPosition = zPositions.labels.rawValue
         myScore.name = "Score"
+        myScore.fontName = "Helvetica Neue"
         addChild(myScore)
         
         roomNumber.text = "Room \(screenCount)"
@@ -289,6 +291,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         roomNumber.zPosition = zPositions.labels.rawValue
         roomNumber.horizontalAlignmentMode = .right
         roomNumber.name = "RoomNumber"
+        roomNumber.fontName = "Helvetica Neue"
         addChild(roomNumber)
         
         ammoF.text = "\(fireAmmo)"
@@ -321,7 +324,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             screenCount += 1
             if(defalts.integer(forKey: Keys.endlessMode) == -1000){
                 makeEnemy()
-                enemyPerLevel = Int.random(in: 1...5)
+                enemyPerLevel = Int.random(in: 1...4)
             }
             else{
                 if(screenCount == 1 || screenCount == 4 || screenCount == 7){
