@@ -18,6 +18,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let leftControl = SKSpriteNode(imageNamed: "leftArrow")
     let shootControl = SKSpriteNode(imageNamed: "shoot")
     let changeWeaponControl = SKSpriteNode(imageNamed: "shoot")
+    let tutorial = SKSpriteNode(imageNamed: "Tutorial")
     
     // Labels
     let myScore = SKLabelNode(text: "Score: 0")
@@ -39,8 +40,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var didChange = false // for changing weapon
     
     // Other variables
-    var touchLocal: CGPoint = CGPoint(x: 0, y: 0) // where were touched
-    var touchLocal2: CGPoint = CGPoint(x: 0, y: 0)
+    var touchLocal: CGPoint! = CGPoint(x: 3000, y: 3000) // where were touched
+    var touchLocal2: CGPoint! = CGPoint(x: 3000, y: 3000)
     var lastFire: Double = 0 // last time the gun fired
     var timerForWalk: TimeInterval = 0 // For walking animation
     var enemyNumber = 0 // how many enemies are left
@@ -105,6 +106,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         myScore.text = "Score: \(scoreHere)"
         ammoF.text = "\(fireAmmo)"
         ammoI.text = "\(iceAmmo)"
+        
+        if tutorial.contains(touchLocal) || tutorial.contains(touchLocal2) {
+            tutorial.removeFromParent()
+        }
         
         if defalts.integer(forKey: Keys.endlessMode) == -1000 {
             roomNumber.text = "Room \(screenCount + 1000)"
@@ -316,6 +321,64 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         ammoI.position = CGPoint(x: changeWeaponControl.position.x + 40, y: changeWeaponControl.position.y - 25)
         ammoI.zPosition = zPositions.labels.rawValue
         addChild(ammoI)
+        
+        if defalts.integer(forKey: Keys.endlessMode) == -1 {
+            createTutorial()
+        }
+    }
+    
+    // MARK: CreateTutorial
+    func createTutorial(){
+        tutorial.position = CGPoint(x: 0, y: 0)
+        tutorial.size = CGSize(width: frame.width, height: frame.height)
+        tutorial.zPosition = zPositions.tutorial.rawValue
+        addChild(tutorial)
+        
+        let moveTut = SKLabelNode(text: "Use arrows\nto move around")
+        moveTut.position = CGPoint(x: frame.minX + 10, y: frame.minY + 125)
+        moveTut.zPosition = zPositions.tutorial.rawValue + 1
+        moveTut.fontSize = 18
+        moveTut.numberOfLines = 2
+        moveTut.horizontalAlignmentMode = .left
+        moveTut.fontName = "Helvetica Neue"
+        tutorial.addChild(moveTut)
+        
+        let shootTut = SKLabelNode(text: "Use the small button to change\n your ammo, and the big one to\nshoot. Be careful with your ammo.")
+        shootTut.position = CGPoint(x: frame.maxX - 30 , y: frame.minY + 125)
+        shootTut.zPosition = zPositions.tutorial.rawValue + 1
+        shootTut.fontSize = 18
+        shootTut.numberOfLines = 2
+        shootTut.horizontalAlignmentMode = .right
+        shootTut.fontName = "Helvetica Neue"
+        tutorial.addChild(shootTut)
+        
+        let scoreTut = SKLabelNode(text: "Your score increases\nmore if you use the right\nweapons in the right enemies")
+        scoreTut.position = CGPoint(x: frame.minX + 10 , y: frame.maxY - 150)
+        scoreTut.zPosition = zPositions.tutorial.rawValue + 1
+        scoreTut.fontSize = 18
+        scoreTut.numberOfLines = 2
+        scoreTut.horizontalAlignmentMode = .left
+        scoreTut.fontName = "Helvetica Neue"
+        tutorial.addChild(scoreTut)
+        
+        let roomTut = SKLabelNode(text: "If you get\nto room 10,\nyou win")
+        roomTut.position = CGPoint(x: frame.maxX - 30 , y: frame.maxY - 150)
+        roomTut.zPosition = zPositions.tutorial.rawValue + 1
+        roomTut.fontSize = 18
+        roomTut.numberOfLines = 2
+        roomTut.horizontalAlignmentMode = .right
+        roomTut.fontName = "Helvetica Neue"
+        tutorial.addChild(roomTut)
+        
+        let tapContinue = SKLabelNode(text: "Tap anywhere\nto continue")
+        tapContinue.position = CGPoint(x: frame.midX, y: frame.midY)
+        tapContinue.zPosition = zPositions.tutorial.rawValue + 1
+        tapContinue.fontSize = 25
+        tapContinue.numberOfLines = 2
+        tapContinue.horizontalAlignmentMode = .center
+        tapContinue.verticalAlignmentMode = .center
+        tapContinue.fontName = "Helvetica Neue"
+        tutorial.addChild(tapContinue)
     }
 
     // MARK: ReloadScreen
