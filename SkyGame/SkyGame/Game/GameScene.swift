@@ -410,7 +410,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     // MARK: MakeEnemy
     func makeEnemy(){
         while(enemyNumber < enemyPerLevel){
-            let choice = enemies.randomElement() ?? "iEye"
+            var choice = enemies.randomElement() ?? "iEye"
+            choice = "iEye"
             let enemy = SKSpriteNode(imageNamed: choice)
             
             let enemyPosition = Int.random(in: -100 ... 300)
@@ -461,6 +462,43 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 break;
             }
             
+            walkAnimate(enemy)
+        }
+    }
+    
+    // MARK: WalkAnimate
+    func walkAnimate(_ enemy: SKSpriteNode) {
+        switch enemy.name {
+        case "Glixino":
+            let animation = [SKTexture(imageNamed: "Glixino"), SKTexture(imageNamed: "Glix1"), SKTexture(imageNamed: "Glix2"), SKTexture(imageNamed: "Glix1"), SKTexture(imageNamed: "Glixino")]
+            let animate = SKAction.animate(with: animation, timePerFrame: 0.3)
+            let wait = SKAction.wait(forDuration: 1.2)
+            let sequence = SKAction.sequence([wait, animate])
+            let sequenceFirst = SKAction.sequence([wait, wait, animate])
+            let forever = SKAction.repeatForever(sequence)
+            enemy.run(SKAction.sequence([sequenceFirst, forever]))
+            break;
+        case "Havyion":
+            let animation = [SKTexture(imageNamed: "Havyion"), SKTexture(imageNamed: "HavFrame")]
+            let animate = SKAction.animate(with: animation, timePerFrame: 0.2)
+            enemy.run(SKAction.repeatForever(animate))
+            break;
+        case "iEye":
+            let animation = [SKTexture(imageNamed: "iEye"), SKTexture(imageNamed: "iEye1"), SKTexture(imageNamed: "iEye2"), SKTexture(imageNamed: "iEye3"), SKTexture(imageNamed: "iEye2"), SKTexture(imageNamed: "iEye1"), SKTexture(imageNamed: "iEye")]
+           let animate = SKAction.animate(with: animation, timePerFrame: 0.05)
+           let wait = SKAction.wait(forDuration: 2)
+           let sequence = SKAction.sequence([wait, animate])
+           enemy.run(SKAction.repeatForever(sequence))
+            break;
+        case "Pinclet":
+            let animation = [SKTexture(imageNamed: "Pinclet"), SKTexture(imageNamed: "PinclFrame"), SKTexture(imageNamed: "Pinclet")]
+            let animate = SKAction.animate(with: animation, timePerFrame: 0.1)
+            let wait = SKAction.wait(forDuration: 0.75)
+            let sequence = SKAction.sequence([wait, animate])
+            enemy.run(SKAction.repeatForever(sequence))
+            break;
+        default:
+            break;
         }
     }
     
