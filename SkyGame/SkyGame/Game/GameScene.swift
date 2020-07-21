@@ -248,7 +248,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         /// Player
         player.zPosition = zPositions.gameArea.rawValue
-        player.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 100, height: player.frame.height))
+        player.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 50, height: player.frame.height))
         addChild(player)
         player.physicsBody?.allowsRotation = false
         // O que o objeto é no mundo fisico
@@ -415,7 +415,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             enemy.position = CGPoint(x: enemyPosition, y: 0)
             enemy.zPosition = zPositions.gameArea.rawValue
-            enemy.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: enemy.size.width, height: enemy.size.height))
+            enemy.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: enemy.size.width / 2, height: enemy.size.height))
             enemy.physicsBody?.categoryBitMask = CollisionType.enemy.rawValue
             enemy.physicsBody?.collisionBitMask = CollisionType.player.rawValue
             enemy.physicsBody?.allowsRotation = false
@@ -487,7 +487,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         case "Pinclet":
             let animation = [SKTexture(imageNamed: "Pinclet"), SKTexture(imageNamed: "PinclFrame"), SKTexture(imageNamed: "Pinclet")]
             let animate = SKAction.animate(with: animation, timePerFrame: 0.1)
-            let wait = SKAction.wait(forDuration: 0.75)
+            let wait = SKAction.wait(forDuration: 1.7)
             let sequence = SKAction.sequence([wait, animate])
             enemy.run(SKAction.repeatForever(sequence))
             break;
@@ -672,7 +672,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             defalts.set("Rooms: \(screenCount)/10", forKey: Keys.rooms)
         }
         
-        let transition = SKTransition.flipHorizontal(withDuration: 0.5)
+        let transition = SKTransition.crossFade(withDuration: 0.5)
         let endScene = GameScene(fileNamed: "endGameScene") ?? GameScene(size: self.size)
         self.view?.presentScene(endScene, transition: transition)
     }
