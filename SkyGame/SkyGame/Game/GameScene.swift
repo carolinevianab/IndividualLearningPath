@@ -64,7 +64,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         screenCount = defalts.integer(forKey: Keys.endlessMode)
         
-        
         createScene()
         
         if defalts.integer(forKey: Keys.endlessMode) == -1000 {
@@ -79,9 +78,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if shootControl.contains(touchLocal) {
             let shootEnded = shooting.reversed()  as [SKTexture]
             player.run(SKAction.animate(with: shootEnded, timePerFrame: 0.01))
-            
         }
-        
         touchLocal = CGPoint(x: 0, y: 0)
         touchLocal2 = CGPoint(x: 0, y: 0)
         player.removeAllActions()
@@ -189,7 +186,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     // MARK: GenerateBackground
     func generateBackground(){
         let choice = backgrounds.randomElement()
-        
         if backgroundNow.name != choice {
             backgroundNow.texture = SKTexture(imageNamed: choice ?? "ground1")
             backgroundNow.position = CGPoint(x: frame.midX, y: frame.midY)
@@ -217,8 +213,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             plantSprite.zPosition = zPositions.gameAreabutBehind.rawValue
             plantSprite.name = plant
             
-            //plantSprite.physicsBody = SKPhysicsBody(circleOfRadius: plantSprite.size.height / 2)
-            plantSprite.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: plantSprite.size.width / 2, height: plantSprite.size.height))
+            plantSprite.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: plantSprite.size.width / 3, height: plantSprite.size.height))
             plantSprite.physicsBody?.affectedByGravity = false
             plantSprite.physicsBody?.categoryBitMask = CollisionType.plant.rawValue
             plantSprite.physicsBody?.collisionBitMask = CollisionType.ground.rawValue
@@ -238,8 +233,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             addChild(tree)
             counter += 1
         }
-        
-        
     }
     
     // MARK: CreateScene
@@ -265,6 +258,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // O que, quando colide, nós queremos saber
         player.physicsBody?.contactTestBitMask = CollisionType.enemy.rawValue
         player.name = "player"
+        player.physicsBody?.restitution = 0.01
          
         /// Left control
         leftControl.position = CGPoint(x: frame.minX + leftControl.size.width / 2, y: frame.minY + leftControl.size.height / 2)
@@ -335,7 +329,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(tutorial)
         
         let moveTut = SKLabelNode(text: "Use arrows\nto move around")
-        moveTut.position = CGPoint(x: frame.minX + 10, y: frame.minY + 125)
+        moveTut.position = CGPoint(x: frame.minX + 30, y: frame.minY + 125)
         moveTut.zPosition = zPositions.tutorial.rawValue + 1
         moveTut.fontSize = 18
         moveTut.numberOfLines = 2
@@ -353,7 +347,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         tutorial.addChild(shootTut)
         
         let scoreTut = SKLabelNode(text: "Your score increases\nmore if you use the right\nweapons in the right enemies")
-        scoreTut.position = CGPoint(x: frame.minX + 10 , y: frame.maxY - 150)
+        scoreTut.position = CGPoint(x: frame.minX + 30 , y: frame.maxY - 150)
         scoreTut.zPosition = zPositions.tutorial.rawValue + 1
         scoreTut.fontSize = 18
         scoreTut.numberOfLines = 2
@@ -410,8 +404,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     // MARK: MakeEnemy
     func makeEnemy(){
         while(enemyNumber < enemyPerLevel){
-            var choice = enemies.randomElement() ?? "iEye"
-            choice = "iEye"
+            let choice = enemies.randomElement() ?? "iEye"
             let enemy = SKSpriteNode(imageNamed: choice)
             
             let enemyPosition = Int.random(in: -100 ... 300)
@@ -439,6 +432,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let movement: SKAction!
             let left: SKAction!
             let right: SKAction!
+            
             switch choice {
             case "Glixino":
                 movement = SKAction.applyImpulse(CGVector(dx: 500, dy: 0), duration: 3)
@@ -511,7 +505,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if weaponStatus && fireAmmo == 0 {return}
         if !weaponStatus && iceAmmo == 0 {return}
         
-        let weapon = SKSpriteNode(imageNamed: "pewpew")
+        let weapon = SKSpriteNode(imageNamed: "shot")
         
         weapon.position = CGPoint(x: player.position.x, y: player.position.y - 20)
         weapon.zPosition = zPositions.gameArea.rawValue
@@ -542,19 +536,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(weapon)
         weapon.physicsBody?.applyImpulse(CGVector(dx: 150, dy: 0))
         
-//        let emitter = SKEmitterNode(fileNamed: "fireball")!
         emitter.zPosition = zPositions.gameArea.rawValue
         emitter.position = CGPoint(x: 0, y: 0)
         emitter.name = "emitter"
-        //addChild(emitter)
         weapon.addChild(emitter)
         
         
         let wait = SKAction.wait(forDuration: 0.1)
-        //let waitEm = SKAction.wait(forDuration: 1)
         let remove = SKAction.removeFromParent()
         weapon.run(SKAction.sequence([wait, remove]))
-        //emitter.run(SKAction.sequence([waitEm, remove]))
     }
     
     
