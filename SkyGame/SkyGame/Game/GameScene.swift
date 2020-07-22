@@ -597,6 +597,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 enemyNumber -= 1
             }
             
+            var emitter: SKEmitterNode!
+            if weaponStatus {
+                emitter = SKEmitterNode(fileNamed: "fireball")
+            }
+            else {
+                emitter = SKEmitterNode(fileNamed: "iceball")
+            }
+            
+            emitter.position = firstNode.position
+            emitter.zPosition = zPositions.gameArea.rawValue
+            addChild(emitter)
+            emitter.run(SKAction.sequence([SKAction.wait(forDuration: 2), SKAction.removeFromParent()]))
+            
             switch firstNode.name {
             case "Glixino":
                 scoreHere += 10
@@ -634,7 +647,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 break;
             default:
                 secondNode.removeFromParent()
-                print("aaaaa")
                 break;
             }
         }
