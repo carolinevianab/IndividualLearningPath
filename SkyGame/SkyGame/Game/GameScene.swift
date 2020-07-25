@@ -608,7 +608,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             emitter.position = firstNode.position
             emitter.zPosition = zPositions.gameArea.rawValue
             addChild(emitter)
-            emitter.run(SKAction.sequence([SKAction.wait(forDuration: 2), SKAction.removeFromParent()]))
+            emitter.run(SKAction.sequence([SKAction.wait(forDuration: 1), SKAction.removeFromParent()]))
             
             switch firstNode.name {
             case "Glixino":
