@@ -18,6 +18,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let leftControl = SKSpriteNode(imageNamed: "leftArrow")
     let shootControl = SKSpriteNode(imageNamed: "shoot")
     let changeWeaponControl = SKSpriteNode(imageNamed: "shoot")
+    let tutorial = SKSpriteNode(imageNamed: "Tutorial")
     
     // Labels
     let myScore = SKLabelNode(text: "Score: 0")
@@ -39,8 +40,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var didChange = false // for changing weapon
     
     // Other variables
-    var touchLocal: CGPoint = CGPoint(x: 0, y: 0) // where were touched
-    var touchLocal2: CGPoint = CGPoint(x: 0, y: 0)
+    var touchLocal: CGPoint! = CGPoint(x: 3000, y: 3000) // where were touched
+    var touchLocal2: CGPoint! = CGPoint(x: 3000, y: 3000)
     var lastFire: Double = 0 // last time the gun fired
     var timerForWalk: TimeInterval = 0 // For walking animation
     var enemyNumber = 0 // how many enemies are left
@@ -63,7 +64,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         screenCount = defalts.integer(forKey: Keys.endlessMode)
         
-        
         createScene()
         
         if defalts.integer(forKey: Keys.endlessMode) == -1000 {
@@ -78,9 +78,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if shootControl.contains(touchLocal) {
             let shootEnded = shooting.reversed()  as [SKTexture]
             player.run(SKAction.animate(with: shootEnded, timePerFrame: 0.01))
-            
         }
-        
         touchLocal = CGPoint(x: 0, y: 0)
         touchLocal2 = CGPoint(x: 0, y: 0)
         player.removeAllActions()
@@ -105,6 +103,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         myScore.text = "Score: \(scoreHere)"
         ammoF.text = "\(fireAmmo)"
         ammoI.text = "\(iceAmmo)"
+        
+        if tutorial.contains(touchLocal) || tutorial.contains(touchLocal2) {
+            tutorial.removeFromParent()
+        }
         
         if defalts.integer(forKey: Keys.endlessMode) == -1000 {
             roomNumber.text = "Room \(screenCount + 1000)"
@@ -184,7 +186,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     // MARK: GenerateBackground
     func generateBackground(){
         let choice = backgrounds.randomElement()
-        
         if backgroundNow.name != choice {
             backgroundNow.texture = SKTexture(imageNamed: choice ?? "ground1")
             backgroundNow.position = CGPoint(x: frame.midX, y: frame.midY)
@@ -212,8 +213,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             plantSprite.zPosition = zPositions.gameAreabutBehind.rawValue
             plantSprite.name = plant
             
-            //plantSprite.physicsBody = SKPhysicsBody(circleOfRadius: plantSprite.size.height / 2)
-            plantSprite.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: plantSprite.size.width / 2, height: plantSprite.size.height))
+            plantSprite.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: plantSprite.size.width / 3, height: plantSprite.size.height))
             plantSprite.physicsBody?.affectedByGravity = false
             plantSprite.physicsBody?.categoryBitMask = CollisionType.plant.rawValue
             plantSprite.physicsBody?.collisionBitMask = CollisionType.ground.rawValue
@@ -233,8 +233,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             addChild(tree)
             counter += 1
         }
-        
-        
     }
     
     // MARK: CreateScene
@@ -250,7 +248,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         /// Player
         player.zPosition = zPositions.gameArea.rawValue
-        player.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 100, height: player.frame.height))
+        player.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 50, height: player.frame.height))
         addChild(player)
         player.physicsBody?.allowsRotation = false
         // O que o objeto é no mundo fisico
@@ -260,6 +258,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // O que, quando colide, nós queremos saber
         player.physicsBody?.contactTestBitMask = CollisionType.enemy.rawValue
         player.name = "player"
+        player.physicsBody?.restitution = 0.01
          
         /// Left control
         leftControl.position = CGPoint(x: frame.minX + leftControl.size.width / 2, y: frame.minY + leftControl.size.height / 2)
@@ -316,6 +315,64 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         ammoI.position = CGPoint(x: changeWeaponControl.position.x + 40, y: changeWeaponControl.position.y - 25)
         ammoI.zPosition = zPositions.labels.rawValue
         addChild(ammoI)
+        
+        if defalts.integer(forKey: Keys.endlessMode) == -1 {
+            createTutorial()
+        }
+    }
+    
+    // MARK: CreateTutorial
+    func createTutorial(){
+        tutorial.position = CGPoint(x: 0, y: 0)
+        tutorial.size = CGSize(width: frame.width, height: frame.height)
+        tutorial.zPosition = zPositions.tutorial.rawValue
+        addChild(tutorial)
+        
+        let moveTut = SKLabelNode(text: "Use arrows\nto move around")
+        moveTut.position = CGPoint(x: frame.minX + 30, y: frame.minY + 125)
+        moveTut.zPosition = zPositions.tutorial.rawValue + 1
+        moveTut.fontSize = 18
+        moveTut.numberOfLines = 2
+        moveTut.horizontalAlignmentMode = .left
+        moveTut.fontName = "Helvetica Neue"
+        tutorial.addChild(moveTut)
+        
+        let shootTut = SKLabelNode(text: "Use the small button to change\n your ammo, and the big one to\nshoot. Be careful with your ammo.")
+        shootTut.position = CGPoint(x: frame.maxX - 30 , y: frame.minY + 125)
+        shootTut.zPosition = zPositions.tutorial.rawValue + 1
+        shootTut.fontSize = 18
+        shootTut.numberOfLines = 2
+        shootTut.horizontalAlignmentMode = .right
+        shootTut.fontName = "Helvetica Neue"
+        tutorial.addChild(shootTut)
+        
+        let scoreTut = SKLabelNode(text: "Your score increases\nmore if you use the right\nweapons in the right enemies")
+        scoreTut.position = CGPoint(x: frame.minX + 30 , y: frame.maxY - 150)
+        scoreTut.zPosition = zPositions.tutorial.rawValue + 1
+        scoreTut.fontSize = 18
+        scoreTut.numberOfLines = 2
+        scoreTut.horizontalAlignmentMode = .left
+        scoreTut.fontName = "Helvetica Neue"
+        tutorial.addChild(scoreTut)
+        
+        let roomTut = SKLabelNode(text: "If you get\nto room 10,\nyou win")
+        roomTut.position = CGPoint(x: frame.maxX - 30 , y: frame.maxY - 150)
+        roomTut.zPosition = zPositions.tutorial.rawValue + 1
+        roomTut.fontSize = 18
+        roomTut.numberOfLines = 2
+        roomTut.horizontalAlignmentMode = .right
+        roomTut.fontName = "Helvetica Neue"
+        tutorial.addChild(roomTut)
+        
+        let tapContinue = SKLabelNode(text: "Tap anywhere\nto continue")
+        tapContinue.position = CGPoint(x: frame.midX, y: frame.midY)
+        tapContinue.zPosition = zPositions.tutorial.rawValue + 1
+        tapContinue.fontSize = 25
+        tapContinue.numberOfLines = 2
+        tapContinue.horizontalAlignmentMode = .center
+        tapContinue.verticalAlignmentMode = .center
+        tapContinue.fontName = "Helvetica Neue"
+        tutorial.addChild(tapContinue)
     }
 
     // MARK: ReloadScreen
@@ -358,7 +415,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             enemy.position = CGPoint(x: enemyPosition, y: 0)
             enemy.zPosition = zPositions.gameArea.rawValue
-            enemy.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: enemy.size.width, height: enemy.size.height))
+            enemy.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: enemy.size.width / 2, height: enemy.size.height))
             enemy.physicsBody?.categoryBitMask = CollisionType.enemy.rawValue
             enemy.physicsBody?.collisionBitMask = CollisionType.player.rawValue
             enemy.physicsBody?.allowsRotation = false
@@ -375,6 +432,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let movement: SKAction!
             let left: SKAction!
             let right: SKAction!
+            
             switch choice {
             case "Glixino":
                 movement = SKAction.applyImpulse(CGVector(dx: 500, dy: 0), duration: 3)
@@ -398,6 +456,43 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 break;
             }
             
+            walkAnimate(enemy)
+        }
+    }
+    
+    // MARK: WalkAnimate
+    func walkAnimate(_ enemy: SKSpriteNode) {
+        switch enemy.name {
+        case "Glixino":
+            let animation = [SKTexture(imageNamed: "Glixino"), SKTexture(imageNamed: "Glix1"), SKTexture(imageNamed: "Glix2"), SKTexture(imageNamed: "Glix1"), SKTexture(imageNamed: "Glixino")]
+            let animate = SKAction.animate(with: animation, timePerFrame: 0.3)
+            let wait = SKAction.wait(forDuration: 1.2)
+            let sequence = SKAction.sequence([wait, animate])
+            let sequenceFirst = SKAction.sequence([wait, wait, animate])
+            let forever = SKAction.repeatForever(sequence)
+            enemy.run(SKAction.sequence([sequenceFirst, forever]))
+            break;
+        case "Havyion":
+            let animation = [SKTexture(imageNamed: "Havyion"), SKTexture(imageNamed: "HavFrame")]
+            let animate = SKAction.animate(with: animation, timePerFrame: 0.2)
+            enemy.run(SKAction.repeatForever(animate))
+            break;
+        case "iEye":
+            let animation = [SKTexture(imageNamed: "iEye"), SKTexture(imageNamed: "iEye1"), SKTexture(imageNamed: "iEye2"), SKTexture(imageNamed: "iEye3"), SKTexture(imageNamed: "iEye2"), SKTexture(imageNamed: "iEye1"), SKTexture(imageNamed: "iEye")]
+           let animate = SKAction.animate(with: animation, timePerFrame: 0.05)
+           let wait = SKAction.wait(forDuration: 2)
+           let sequence = SKAction.sequence([wait, animate])
+           enemy.run(SKAction.repeatForever(sequence))
+            break;
+        case "Pinclet":
+            let animation = [SKTexture(imageNamed: "Pinclet"), SKTexture(imageNamed: "PinclFrame"), SKTexture(imageNamed: "Pinclet")]
+            let animate = SKAction.animate(with: animation, timePerFrame: 0.1)
+            let wait = SKAction.wait(forDuration: 1.7)
+            let sequence = SKAction.sequence([wait, animate])
+            enemy.run(SKAction.repeatForever(sequence))
+            break;
+        default:
+            break;
         }
     }
     
@@ -410,7 +505,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if weaponStatus && fireAmmo == 0 {return}
         if !weaponStatus && iceAmmo == 0 {return}
         
-        let weapon = SKSpriteNode(imageNamed: "pewpew")
+        let weapon = SKSpriteNode(imageNamed: "shot")
         
         weapon.position = CGPoint(x: player.position.x, y: player.position.y - 20)
         weapon.zPosition = zPositions.gameArea.rawValue
@@ -441,19 +536,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(weapon)
         weapon.physicsBody?.applyImpulse(CGVector(dx: 150, dy: 0))
         
-//        let emitter = SKEmitterNode(fileNamed: "fireball")!
         emitter.zPosition = zPositions.gameArea.rawValue
         emitter.position = CGPoint(x: 0, y: 0)
         emitter.name = "emitter"
-        //addChild(emitter)
         weapon.addChild(emitter)
         
         
         let wait = SKAction.wait(forDuration: 0.1)
-        //let waitEm = SKAction.wait(forDuration: 1)
         let remove = SKAction.removeFromParent()
         weapon.run(SKAction.sequence([wait, remove]))
-        //emitter.run(SKAction.sequence([waitEm, remove]))
     }
     
     
@@ -506,6 +597,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 enemyNumber -= 1
             }
             
+            var emitter: SKEmitterNode!
+            if weaponStatus {
+                emitter = SKEmitterNode(fileNamed: "fireball")
+            }
+            else {
+                emitter = SKEmitterNode(fileNamed: "iceball")
+            }
+            
+            emitter.position = firstNode.position
+            emitter.zPosition = zPositions.gameArea.rawValue
+            addChild(emitter)
+            emitter.run(SKAction.sequence([SKAction.wait(forDuration: 1), SKAction.removeFromParent()]))
+            
             switch firstNode.name {
             case "Glixino":
                 scoreHere += 10
@@ -543,7 +647,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 break;
             default:
                 secondNode.removeFromParent()
-                print("aaaaa")
                 break;
             }
         }
@@ -581,7 +684,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             defalts.set("Rooms: \(screenCount)/10", forKey: Keys.rooms)
         }
         
-        let transition = SKTransition.flipHorizontal(withDuration: 0.5)
+        let transition = SKTransition.crossFade(withDuration: 0.5)
         let endScene = GameScene(fileNamed: "endGameScene") ?? GameScene(size: self.size)
         self.view?.presentScene(endScene, transition: transition)
     }

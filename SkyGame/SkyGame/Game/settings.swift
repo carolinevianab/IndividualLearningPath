@@ -22,6 +22,7 @@ extension GameScene {
         case gameArea = 4
         case controls = 6
         case labels = 8
+        case tutorial = 10
     }
     
 }

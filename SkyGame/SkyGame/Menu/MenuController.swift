@@ -52,7 +52,8 @@ class MenuController: SKScene {
         
         let force = SKAction.applyForce(CGVector(dx: 100, dy: 100), duration: 3)
         let rotate = SKAction.rotate(byAngle: .pi/2, duration: 10)
-        let sequence = SKAction.sequence([force, rotate])
+        let forceTwo = SKAction.applyForce(CGVector(dx: -50, dy: 100), duration: 3)
+        let sequence = SKAction.sequence([force, rotate, forceTwo])
         decorationPinclet.run(SKAction.repeatForever(sequence))
         
     }
@@ -65,7 +66,7 @@ class MenuController: SKScene {
         
         if nodesArray.first?.name == "bntStartNormal" {
             defalts.set(-1, forKey: Keys.endlessMode)
-            let transition = SKTransition.flipHorizontal(withDuration: 0.5)
+            let transition = SKTransition.crossFade(withDuration: 0.5)
             let intoGame = GameScene(fileNamed: "GameScene") ?? GameScene(size: self.size)
             self.view?.presentScene(intoGame, transition: transition)
         }
