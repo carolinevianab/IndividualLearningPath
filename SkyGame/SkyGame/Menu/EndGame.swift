@@ -16,6 +16,8 @@ class EndGame: SKScene {
     var background: SKSpriteNode!
     var defalts = UserDefaults.standard
     
+    let label = SKLabelNode(text: "Back to menu")
+    
     override func didMove(to view: SKView) {
         bntMenu = (self.childNode(withName: "bntMenu") as! SKSpriteNode)
         lblScore = (self.childNode(withName: "lblScore") as! SKLabelNode)
@@ -26,6 +28,15 @@ class EndGame: SKScene {
         gameStatus.text = defalts.string(forKey: Keys.message) ?? "help"
         lblScore.text = String(defalts.integer(forKey: Keys.score))
         roomsPassed.text = defalts.string(forKey: Keys.rooms)
+        
+        label.position = CGPoint(x: bntMenu.position.x, y: bntMenu.position.y + 5)
+        label.fontSize = 50
+        label.fontColor = .black
+        label.zPosition = 10
+        label.name = "bntMenu"
+        label.verticalAlignmentMode = .center
+        label.horizontalAlignmentMode = .center
+        addChild(label)
         
         if gameStatus.text == "You win!" {
             background.position = CGPoint(x: -309, y: -0.5)

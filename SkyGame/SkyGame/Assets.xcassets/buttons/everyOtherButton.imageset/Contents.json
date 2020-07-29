@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "startGameButton.png",
+      "filename" : "everyOtherButton.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
