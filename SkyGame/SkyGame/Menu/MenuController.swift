@@ -15,6 +15,10 @@ class MenuController: SKScene {
     var background: SKSpriteNode!
     let decorationPinclet = SKSpriteNode(imageNamed: "Pinclet")
     
+    
+    let lblStartGame = SKLabelNode(text: "Start Game")
+    let lblEndlessMode = SKLabelNode(text: "Endless Mode")
+    
     override func didMove(to view: SKView) {
         startgame = (self.childNode(withName: "bntStartNormal") as! SKSpriteNode)
         startGameEndless = (self.childNode(withName: "bntStartEndless") as! SKSpriteNode)
@@ -30,6 +34,24 @@ class MenuController: SKScene {
         emitter.position = CGPoint(x: 0, y: 0)
         emitter.zPosition = background.zPosition + 1
         addChild(emitter)
+        
+        lblStartGame.position = CGPoint(x: startgame.position.x, y: startgame.position.y + 5)
+        lblStartGame.fontSize = 35
+        lblStartGame.fontColor = .black
+        lblStartGame.zPosition = 10
+        lblStartGame.name = "bntStartNormal"
+        lblStartGame.verticalAlignmentMode = .center
+        lblStartGame.horizontalAlignmentMode = .center
+        addChild(lblStartGame)
+        
+        lblEndlessMode.position = CGPoint(x: startGameEndless.position.x, y: startGameEndless.position.y + 5)
+        lblEndlessMode.fontSize = 35
+        lblEndlessMode.fontColor = .black
+        lblEndlessMode.zPosition = 10
+        lblEndlessMode.name = "bntStartEndless"
+        lblEndlessMode.verticalAlignmentMode = .center
+        lblEndlessMode.horizontalAlignmentMode = .center
+        addChild(lblEndlessMode)
         
         setPinclet()
         

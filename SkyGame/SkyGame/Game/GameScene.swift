@@ -346,12 +346,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         shootTut.fontName = "Helvetica Neue"
         tutorial.addChild(shootTut)
         
-        let scoreTut = SKLabelNode(text: "Your score increases\nmore if you use the right\nweapons in the right enemies")
-        scoreTut.position = CGPoint(x: frame.minX + 30 , y: frame.maxY - 150)
+        let scoreTut = SKLabelNode(text: """
+            Your score increases
+            more if you use the right
+            weapons in the right enemies.
+            Pinclets are vulnerable to ice,
+            and iEyes are vulnerable to fire.
+            """)
+        scoreTut.position = CGPoint(x: frame.minX + 30 , y: frame.maxY - 80)
         scoreTut.zPosition = zPositions.tutorial.rawValue + 1
         scoreTut.fontSize = 18
         scoreTut.numberOfLines = 2
         scoreTut.horizontalAlignmentMode = .left
+        scoreTut.verticalAlignmentMode = .top
         scoreTut.fontName = "Helvetica Neue"
         tutorial.addChild(scoreTut)
         
@@ -667,6 +674,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     // MARK: youWin
     func youWin(){
+        screenCount -= 1
         endGame(endStatus: "You win!")
         
     }
